@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lincity 1.12pre52\n"
-"POT-Creation-Date: 2003-11-20 00:48-0500\n"
+"POT-Creation-Date: 2004-08-14 11:57-0400\n"
 "PO-Revision-Date: 2003-03-26 00:39-0500\n"
 "Last-Translator: kkk <kkk@kkk>\n"
 "Language-Team: it_IT <kkk@kkk>\n"
@@ -61,140 +61,149 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dic"
 
-#: engine.c:135
+#: engine.c:144 engine.c:158
 msgid "You can't build a tip here"
 msgstr ""
 
-#: engine.c:136
-msgid "This is already landfill"
+#: engine.c:145 engine.c:187
+msgid "This area was once a landfill"
 msgstr ""
 
-#: engine.c:137 engine.c:150 screen.c:2305 screen.c:2309 screen.c:2379
-#: screen.c:2383
+#: engine.c:146 engine.c:160 engine.c:188 engine.c:195 engine.c:203
+#: screen.c:2305 screen.c:2309 screen.c:2379 screen.c:2383
 msgid "OK"
 msgstr ""
 
-#: engine.c:148
+#: engine.c:159
+msgid "This is already landfill"
+msgstr ""
+
+#: engine.c:186 engine.c:193 engine.c:201
 msgid "You can't build a mine here"
 msgstr ""
 
-#: engine.c:149
+#: engine.c:194
+#, fuzzy
+msgid "There is no ore left at this site"
+msgstr "Nessuno scenario salvato con questo numero."
+
+#: engine.c:202
 msgid "This was already a mine or tip"
 msgstr ""
 
-#: engine.c:3200
+#: engine.c:3265
 msgid "It's at a power line."
 msgstr ""
 
-#: engine.c:3202
+#: engine.c:3267
 msgid "It's at a solar power station."
 msgstr ""
 
-#: engine.c:3204
+#: engine.c:3269
 msgid "It's at a substation."
 msgstr ""
 
-#: engine.c:3206
+#: engine.c:3271
 msgid "It's at a residential area."
 msgstr ""
 
-#: engine.c:3208
+#: engine.c:3273
 msgid "It's at a farm."
 msgstr ""
 
-#: engine.c:3210
+#: engine.c:3275
 msgid "It's at a market."
 msgstr ""
 
-#: engine.c:3212
+#: engine.c:3277
 msgid "It's at a track."
 msgstr ""
 
-#: engine.c:3214
+#: engine.c:3279
 msgid "It's at a coal mine."
 msgstr ""
 
-#: engine.c:3216
+#: engine.c:3281
 msgid "It's at a railway."
 msgstr ""
 
-#: engine.c:3218
+#: engine.c:3283
 msgid "It's at a coal power station."
 msgstr ""
 
-#: engine.c:3220
+#: engine.c:3285
 msgid "It's at a road."
 msgstr ""
 
-#: engine.c:3222
+#: engine.c:3287
 msgid "It's at light industry."
 msgstr ""
 
-#: engine.c:3224
+#: engine.c:3289
 msgid "It's at a university."
 msgstr ""
 
-#: engine.c:3226
+#: engine.c:3291
 msgid "It's at a commune."
 msgstr ""
 
-#: engine.c:3228
+#: engine.c:3293
 msgid "It's at a tip."
 msgstr ""
 
-#: engine.c:3230
+#: engine.c:3295
 msgid "It's at a port."
 msgstr ""
 
-#: engine.c:3232
+#: engine.c:3297
 msgid "It's at a steel works."
 msgstr ""
 
-#: engine.c:3234
+#: engine.c:3299
 msgid "It's at a recycle centre."
 msgstr ""
 
-#: engine.c:3236
+#: engine.c:3301
 msgid "It's at a health centre."
 msgstr ""
 
-#: engine.c:3238
+#: engine.c:3303
 msgid "It's at a rocket site."
 msgstr ""
 
-#: engine.c:3240
+#: engine.c:3305
 msgid "It's at a windmill."
 msgstr ""
 
-#: engine.c:3242
+#: engine.c:3307
 msgid "It's at a school."
 msgstr ""
 
-#: engine.c:3244
+#: engine.c:3309
 msgid "It's at a blacksmith."
 msgstr ""
 
-#: engine.c:3246
+#: engine.c:3311
 msgid "It's at a mill."
 msgstr ""
 
-#: engine.c:3248
+#: engine.c:3313
 msgid "It's at a pottery."
 msgstr ""
 
-#: engine.c:3250
+#: engine.c:3315
 msgid "It's at a fire station!!!."
 msgstr ""
 
-#: engine.c:3252
+#: engine.c:3317
 msgid "It's at a cricket pitch!!!."
 msgstr ""
 
-#: engine.c:3254
+#: engine.c:3319
 msgid "It's at a shanty town."
 msgstr ""
 
-#: engine.c:3256
+#: engine.c:3321
 msgid "UNKNOWN!"
 msgstr ""
 
@@ -893,370 +902,370 @@ msgstr ""
 msgid "%d sections of %s will cost %3d to build"
 msgstr ""
 
-#: mps.c:414
+#: mps.c:422
 msgid "People"
 msgstr ""
 
-#: mps.c:415 mps.c:636 mps.c:664 mps.c:709 mps.c:907 mps.c:1040
+#: mps.c:423 mps.c:644 mps.c:672 mps.c:717 mps.c:915 mps.c:1048
 #, fuzzy
 msgid "Power"
 msgstr "Porto"
 
-#: mps.c:416
+#: mps.c:424
 #, fuzzy
 msgid "Fed"
 msgstr "Feb"
 
-#: mps.c:417
+#: mps.c:425
 msgid "Empld"
 msgstr ""
 
-#: mps.c:418
+#: mps.c:426
 msgid "H cov"
 msgstr ""
 
-#: mps.c:419
+#: mps.c:427
 msgid "F cov"
 msgstr ""
 
-#: mps.c:420
+#: mps.c:428
 msgid "C cov"
 msgstr ""
 
-#: mps.c:421
+#: mps.c:429
 msgid "Poll'n"
 msgstr ""
 
-#: mps.c:422
+#: mps.c:430
 msgid "Job pro"
 msgstr ""
 
 #. TRANSLATORS:  YES and NO must be same lengths
-#: mps.c:434 mps.c:440 mps.c:446 mps.c:452 mps.c:458 mps.c:464 mps.c:647
-#: mps.c:679 mps.c:921 mps.c:1306 mps.c:1310 mps.c:1314 mps.c:1318 mps.c:1346
-#: mps.c:1348 mps.c:1350
+#: mps.c:442 mps.c:448 mps.c:454 mps.c:460 mps.c:466 mps.c:472 mps.c:655
+#: mps.c:687 mps.c:929 mps.c:1314 mps.c:1318 mps.c:1322 mps.c:1326 mps.c:1354
+#: mps.c:1356 mps.c:1358
 msgid "YES"
 msgstr ""
 
-#: mps.c:436 mps.c:442 mps.c:448 mps.c:454 mps.c:460 mps.c:466 mps.c:649
-#: mps.c:681 mps.c:923 mps.c:1308 mps.c:1312 mps.c:1316 mps.c:1320 mps.c:1346
-#: mps.c:1348 mps.c:1350
+#: mps.c:444 mps.c:450 mps.c:456 mps.c:462 mps.c:468 mps.c:474 mps.c:657
+#: mps.c:689 mps.c:931 mps.c:1316 mps.c:1320 mps.c:1324 mps.c:1328 mps.c:1354
+#: mps.c:1356 mps.c:1358
 msgid "NO "
 msgstr ""
 
-#: mps.c:475
+#: mps.c:483
 msgid "   good"
 msgstr ""
 
-#: mps.c:485
+#: mps.c:493
 msgid "Food"
 msgstr ""
 
-#: mps.c:486 mps.c:783 mps.c:879 mps.c:997 mps.c:1108 mps.c:1388 mps.c:1410
-#: mps.c:1432
+#: mps.c:494 mps.c:791 mps.c:887 mps.c:1005 mps.c:1116 mps.c:1396 mps.c:1418
+#: mps.c:1440
 msgid "Jobs"
 msgstr ""
 
-#: mps.c:487 mps.c:713 mps.c:782
+#: mps.c:495 mps.c:721 mps.c:790
 msgid "Coal"
 msgstr ""
 
-#: mps.c:488 mps.c:880 mps.c:998 mps.c:1109 mps.c:1389 mps.c:1411 mps.c:1433
+#: mps.c:496 mps.c:888 mps.c:1006 mps.c:1117 mps.c:1397 mps.c:1419 mps.c:1441
 msgid "Goods"
 msgstr ""
 
-#: mps.c:489 mps.c:667 mps.c:712
+#: mps.c:497 mps.c:675 mps.c:720
 msgid "Ore"
 msgstr ""
 
-#: mps.c:490 mps.c:668 mps.c:999
+#: mps.c:498 mps.c:676 mps.c:1007
 #, fuzzy
 msgid "Steel"
 msgstr "Vendi"
 
-#: mps.c:491
+#: mps.c:499
 msgid "Waste"
 msgstr ""
 
-#: mps.c:637 mps.c:784 mps.c:849 mps.c:911 mps.c:1037
+#: mps.c:645 mps.c:792 mps.c:857 mps.c:919 mps.c:1045
 msgid "Tech"
 msgstr ""
 
-#: mps.c:638
+#: mps.c:646
 msgid "Prod"
 msgstr ""
 
-#: mps.c:665 mps.c:710
+#: mps.c:673 mps.c:718
 msgid "Output"
 msgstr ""
 
-#: mps.c:666 mps.c:711
+#: mps.c:674 mps.c:719
 msgid "Store"
 msgstr ""
 
-#: mps.c:669 mps.c:714 mps.c:786 mps.c:850 mps.c:882 mps.c:912 mps.c:1111
-#: mps.c:1139 mps.c:1164 mps.c:1192
+#: mps.c:677 mps.c:722 mps.c:794 mps.c:858 mps.c:890 mps.c:920 mps.c:1119
+#: mps.c:1147 mps.c:1172 mps.c:1200
 msgid "Capacity"
 msgstr ""
 
 #. TRANSLATORS:  "COAL", "YES ", and "NO  " must be same length
-#: mps.c:726 screen.c:2160
+#: mps.c:734 screen.c:2160
 msgid "COAL"
 msgstr "CARBONE"
 
-#: mps.c:728
+#: mps.c:736
 msgid "YES "
 msgstr ""
 
-#: mps.c:730
+#: mps.c:738
 msgid "NO  "
 msgstr ""
 
-#: mps.c:758 mps.c:943
+#: mps.c:766 mps.c:951
 msgid "Stock"
 msgstr ""
 
-#: mps.c:759 mps.c:944
+#: mps.c:767 mps.c:952
 msgid "Reserve"
 msgstr ""
 
-#: mps.c:773
+#: mps.c:781
 msgid " EMPTY "
 msgstr ""
 
-#: mps.c:781 mps.c:848
+#: mps.c:789 mps.c:856
 msgid "Cycle"
 msgstr ""
 
-#: mps.c:785 mps.c:826 mps.c:851 mps.c:964 mps.c:1041
+#: mps.c:793 mps.c:834 mps.c:859 mps.c:972 mps.c:1049
 msgid "Grid"
 msgstr ""
 
-#: mps.c:825
+#: mps.c:833
 msgid "Anim"
 msgstr ""
 
-#: mps.c:827
+#: mps.c:835
 msgid "Debug"
 msgstr ""
 
-#: mps.c:881 mps.c:1087 mps.c:1110
+#: mps.c:889 mps.c:1095 mps.c:1118
 msgid "T made"
 msgstr ""
 
-#: mps.c:908
+#: mps.c:916
 msgid "O stock"
 msgstr ""
 
-#: mps.c:909
+#: mps.c:917
 msgid "W store"
 msgstr ""
 
-#: mps.c:910
+#: mps.c:918
 #, fuzzy
 msgid "S store"
 msgstr "Salvataggio tcore"
 
-#: mps.c:965 mps.c:1042
+#: mps.c:973 mps.c:1050
 #, fuzzy
 msgid "Max"
 msgstr "Mag"
 
-#: mps.c:966 mps.c:1043
+#: mps.c:974 mps.c:1051
 msgid "Avail"
 msgstr ""
 
-#: mps.c:967 mps.c:1044
+#: mps.c:975 mps.c:1052
 msgid "Demand"
 msgstr ""
 
-#: mps.c:968 mps.c:1045
+#: mps.c:976 mps.c:1053
 msgid "Here"
 msgstr ""
 
-#: mps.c:1000
+#: mps.c:1008
 msgid "Launch"
 msgstr ""
 
-#: mps.c:1024 screen.c:2613
+#: mps.c:1032 screen.c:2613
 msgid "ROCKET LAUNCH"
 msgstr ""
 
-#: mps.c:1025 screen.c:2614
+#: mps.c:1033 screen.c:2614
 msgid "You can launch the rocket now or wait until later."
 msgstr ""
 
-#: mps.c:1026 screen.c:2615
+#: mps.c:1034 screen.c:2615
 msgid "If you wait, it costs you *only* money to keep the"
 msgstr ""
 
-#: mps.c:1027 screen.c:2616
+#: mps.c:1035 screen.c:2616
 msgid "rocket ready.    Launch?"
 msgstr ""
 
-#: mps.c:1086
+#: mps.c:1094
 msgid "Built"
 msgstr ""
 
-#: mps.c:1137 mps.c:1161 mps.c:1189
+#: mps.c:1145 mps.c:1169 mps.c:1197
 msgid "G store"
 msgstr ""
 
-#: mps.c:1138 mps.c:1163 mps.c:1191
+#: mps.c:1146 mps.c:1171 mps.c:1199
 msgid "C store"
 msgstr ""
 
-#: mps.c:1162
+#: mps.c:1170
 msgid "F store"
 msgstr ""
 
-#: mps.c:1190
+#: mps.c:1198
 msgid "O store"
 msgstr ""
 
-#: mps.c:1219
+#: mps.c:1227
 msgid "  CONNECTED  "
 msgstr ""
 
-#: mps.c:1222
+#: mps.c:1230
 msgid "NOT CONNECTED"
 msgstr ""
 
-#: mps.c:1223
+#: mps.c:1231
 msgid "to river sytem"
 msgstr ""
 
-#: mps.c:1231
+#: mps.c:1239
 msgid "     Buy   Sell"
 msgstr ""
 
-#: mps.c:1232
+#: mps.c:1240
 msgid "F"
 msgstr ""
 
-#: mps.c:1233
+#: mps.c:1241
 msgid "C"
 msgstr ""
 
-#: mps.c:1234
+#: mps.c:1242
 msgid "O"
 msgstr ""
 
-#: mps.c:1235
+#: mps.c:1243
 msgid "G"
 msgstr ""
 
-#: mps.c:1236
+#: mps.c:1244
 msgid "S"
 msgstr ""
 
-#: mps.c:1272
+#: mps.c:1280
 msgid "  Waste stored"
 msgstr ""
 
-#: mps.c:1273
+#: mps.c:1281
 msgid "   last month"
 msgstr ""
 
-#: mps.c:1274
+#: mps.c:1282
 #, c-format
 msgid "       % full"
 msgstr ""
 
-#: mps.c:1293
+#: mps.c:1301
 msgid "   Activity"
 msgstr ""
 
-#: mps.c:1294
+#: mps.c:1302
 msgid "  last month"
 msgstr ""
 
-#: mps.c:1295
+#: mps.c:1303
 msgid "  Coal"
 msgstr ""
 
-#: mps.c:1296
+#: mps.c:1304
 msgid "   Ore"
 msgstr ""
 
-#: mps.c:1297
+#: mps.c:1305
 #, fuzzy
 msgid " Steel"
 msgstr "Vendi"
 
-#: mps.c:1298
+#: mps.c:1306
 msgid " Waste"
 msgstr ""
 
-#: mps.c:1328
+#: mps.c:1336
 msgid "Grid:"
 msgstr ""
 
-#: mps.c:1329
+#: mps.c:1337
 msgid "Coverages:"
 msgstr ""
 
-#: mps.c:1330
+#: mps.c:1338
 msgid "Fire     "
 msgstr ""
 
-#: mps.c:1331
+#: mps.c:1339
 msgid "Health   "
 msgstr ""
 
-#: mps.c:1332
+#: mps.c:1340
 msgid "Cricket  "
 msgstr ""
 
-#: mps.c:1333
+#: mps.c:1341
 msgid "Pollution"
 msgstr ""
 
-#: mps.c:1334
+#: mps.c:1342
 msgid " Bull"
 msgstr ""
 
-#: mps.c:1354
+#: mps.c:1362
 msgid "(clear) "
 msgstr ""
 
-#: mps.c:1356
+#: mps.c:1364
 msgid "(good)  "
 msgstr ""
 
-#: mps.c:1358
+#: mps.c:1366
 msgid "(fair)  "
 msgstr ""
 
-#: mps.c:1360
+#: mps.c:1368
 msgid "(smelly)"
 msgstr ""
 
-#: mps.c:1362
+#: mps.c:1370
 msgid "(smokey)"
 msgstr ""
 
-#: mps.c:1364
+#: mps.c:1372
 msgid "(smoggy)"
 msgstr ""
 
-#: mps.c:1366
+#: mps.c:1374
 msgid "(bad)   "
 msgstr ""
 
-#: mps.c:1368
+#: mps.c:1376
 msgid "(v bad) "
 msgstr ""
 
-#: mps.c:1370
+#: mps.c:1378
 msgid "(death!)"
 msgstr ""
 
-#: mps.c:1375
+#: mps.c:1383
 msgid "  (N/A)"
 msgstr ""
 
-#: mps.c:1454
+#: mps.c:1462
 msgid "FINANCE"
 msgstr ""
 
@@ -1264,47 +1273,47 @@ msgstr ""
 #. IT=Income tax, CT=Coal tax, GT=Goods tax, XP=Exports
 #. OC=Other costs, UC=Unemployment costs,
 #. TC=Transportation costs, IP=Imports
-#: mps.c:1460
+#: mps.c:1468
 msgid "Income   Expend"
 msgstr ""
 
-#: mps.c:1461
+#: mps.c:1469
 msgid "IT"
 msgstr ""
 
-#: mps.c:1462
+#: mps.c:1470
 msgid "CT"
 msgstr ""
 
-#: mps.c:1463
+#: mps.c:1471
 msgid "GT"
 msgstr ""
 
-#: mps.c:1464
+#: mps.c:1472
 msgid "XP"
 msgstr ""
 
-#: mps.c:1465
+#: mps.c:1473
 msgid "OC"
 msgstr ""
 
-#: mps.c:1466
+#: mps.c:1474
 msgid "UC"
 msgstr ""
 
-#: mps.c:1467
+#: mps.c:1475
 msgid "TC"
 msgstr ""
 
-#: mps.c:1468
+#: mps.c:1476
 msgid "IP"
 msgstr ""
 
-#: mps.c:1469
+#: mps.c:1477
 msgid "Tot"
 msgstr ""
 
-#: mps.c:1476
+#: mps.c:1484
 msgid "OTHER COSTS"
 msgstr ""
 
@@ -1320,84 +1329,84 @@ msgstr ""
 #. Ck=Cricket costs.
 #. Rc=Recycling costs.
 #.
-#: mps.c:1490
+#: mps.c:1498
 msgid "It"
 msgstr ""
 
-#: mps.c:1491
+#: mps.c:1499
 msgid "Sc"
 msgstr ""
 
-#: mps.c:1492
+#: mps.c:1500
 msgid "Un"
 msgstr ""
 
-#: mps.c:1493
+#: mps.c:1501
 msgid "Dt"
 msgstr ""
 
-#: mps.c:1494
+#: mps.c:1502
 msgid "Wn"
 msgstr ""
 
-#: mps.c:1495
+#: mps.c:1503
 msgid "Hl"
 msgstr ""
 
-#: mps.c:1496
+#: mps.c:1504
 msgid "Rk"
 msgstr ""
 
-#: mps.c:1497
+#: mps.c:1505
 msgid "Fr"
 msgstr ""
 
-#: mps.c:1498
+#: mps.c:1506
 msgid "Ck"
 msgstr ""
 
-#: mps.c:1499
+#: mps.c:1507
 msgid "Rc"
 msgstr ""
 
-#: mps.c:1506 mps.c:1515
+#: mps.c:1514 mps.c:1523
 msgid "PEOPLE"
 msgstr ""
 
-#: mps.c:1507 mps.c:1516
+#: mps.c:1515 mps.c:1524
 msgid "Pop"
 msgstr ""
 
-#: mps.c:1508
+#: mps.c:1516
 msgid "Unnat death"
 msgstr ""
 
-#: mps.c:1517
+#: mps.c:1525
 msgid "Housed"
 msgstr ""
 
-#: mps.c:1518
+#: mps.c:1526
 #, fuzzy
 msgid "Housed %"
 msgstr "minerali_usati=%d\n"
 
-#: mps.c:1519
+#: mps.c:1527
 msgid "Shanties"
 msgstr ""
 
-#: mps.c:1521
+#: mps.c:1529
 msgid "Unn Dths"
 msgstr ""
 
-#: mps.c:1522
+#: mps.c:1530
 msgid "Unemp %"
 msgstr ""
 
-#: mps.c:1523
+#: mps.c:1531
 msgid "Starv %"
 msgstr ""
 
-#: mps.c:1654
+#: mps.c:1662
 #, c-format
 msgid "For year %04d"
 msgstr ""

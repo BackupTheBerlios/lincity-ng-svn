@@ -1,5 +1,7 @@
-aclocal
-automake --add-missing --foreign Makefile
+# aclocal
+aclocal-1.7
+# automake --add-missing --foreign Makefile
+automake-1.7 --add-missing --foreign Makefile
 autoconf
 autoheader
 rm -f config.cache
