@@ -144,6 +144,7 @@ mappoint_stats (int x, int y, int button)
 
 
     } else if (x == -2) {
+      /* Global statistics */
 	if (button != oldbut) {
 	    xx = x;
 	    yy = y;
@@ -155,6 +156,7 @@ mappoint_stats (int x, int y, int button)
 	    Fgl_setfontcolors (TEXT_BG_COLOUR, TEXT_FG_COLOUR);
 	}
     } else if (x == -1) {
+      /* Use old values */
 	x = xx;
 	y = yy;
 	button = oldbut;
@@ -194,6 +196,8 @@ mappoint_stats (int x, int y, int button)
 	else
 	    mps_setup(x,y);
     }
+
+    /* Now act on our decisions */
 
     Fgl_setfontcolors (14, TEXT_FG_COLOUR);
 
@@ -299,6 +303,10 @@ mappoint_stats (int x, int y, int button)
 	case (GROUP_HEALTH):
 	    mps_health (x, y);
 	    break;
+	default: 
+	    xx = -2;
+	    yy = -2;
+	    oldbut = 2;
 	}
     }
 

@@ -291,6 +291,11 @@ bulldoze_item (int x, int y)
 			do_bulldoze_area (CST_WATER, x + i, y + j);
 	}
     }
+    /* Tell mps to check that we selected a valid module; if the previously
+       selected module just got bulldozed, this will ensure that mps doesn't
+       try to display it */
+    mappoint_stats(-1,-1,-1);
+
     return size;  /* No longer used... */
 }
 
