@@ -1,0 +1,30 @@
+README:
+-------
+Attempt to implement some kind of water management
+
+TODO: 
+-----
+- transport capacity for water
+- show well's range in starvation window (<= market range)
+- add water management for residence (like food)
+- add water well to random village
+
+- think of how to import existing games without killing all population by thirstyness.
+  (maybe just add a new version to check at load time if water management should be enabled)
+
+AIM:
+----
+* Water availability can be computed from the initial map, from shortest distance
+    to navigable water. Area without water should be yellow-brown like desert.
+    Areas without water would need high-tech deep well and/or pipes to feed the water station.
+* Water quality (from drinkable to mortal). 
+* farms, industries also need water (connection needed?, or pipes?), and can pollute it
+* park along a river or around a well will also reduce the pollution.
+* pollution transported by river will follow the flow, so travel toward the bottom
+    of the map (roughtly oposite of win direction :-) 
+
+REMARKS:
+--------
+* Code contains obsolete stuff from old lincity (eg .csi references ...). Maybe a clean up should
+ be considered, but that can be a big job with compatibility issues.
+ (so in another branch, and later as far as i m concerned :-)
