@@ -515,6 +515,18 @@ struct GROUP main_groups[NUM_OF_GROUPS] =
       GROUP_RESIDENCE_HH_TECH
     },
     /* 41 */
+        { N_("Water well"),
+      FALSE,                           /* need credit? */
+      GROUP_WATERWELL,
+      2,                               /* size */
+      GROUP_WATERWELL_COLOUR,
+      GROUP_WATERWELL_COST_MUL,
+      GROUP_WATERWELL_BUL_COST,
+      GROUP_WATERWELL_FIREC,
+      GROUP_WATERWELL_COST,
+      GROUP_WATERWELL_TECH
+    },
+    /* 42 */
     /* End of Data */
     { "EOF",
       FALSE,                           /* need credit? */
@@ -1175,6 +1187,9 @@ void init_types(void)
 
     main_types[CST_WATER_LURD].group=GROUP_WATER;
     main_types[CST_WATER_LURD].graphic=load_graphic(CST_WATER_LURD_G);
+
+    main_types[CST_WATERWELL].group=GROUP_WATERWELL;
+    main_types[CST_WATERWELL].graphic=load_graphic(CST_WATERWELL_G);
 
     main_types[CST_HEALTH].group=GROUP_HEALTH;
     main_types[CST_HEALTH].graphic=load_graphic(CST_HEALTH_G);

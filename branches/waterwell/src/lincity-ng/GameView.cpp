@@ -651,6 +651,7 @@ void GameView::loadTextures()
    preReadCityTexture( CST_WATER_LUR,         "waterlur.png" );
    preReadCityTexture( CST_WATER_URD,         "waterurd.png" );
    preReadCityTexture( CST_WATER_LURD,        "waterlurd.png" );
+   preReadCityTexture( CST_WATERWELL,         "waterwell.png" );
    preReadCityTexture( CST_CRICKET_1,         "cricket1.png" );
    preReadCityTexture( CST_CRICKET_2,         "cricket2.png" );
    preReadCityTexture( CST_CRICKET_3,         "cricket3.png" );

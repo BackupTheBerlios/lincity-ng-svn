@@ -565,6 +565,10 @@
 #define CST_WATER_LURD_G        "waterlurd.csi"
 #define LCT_WATER_LURD_G        "waterlurd"
 
+#define CST_WATERWELL           238
+#define CST_WATERWELL_G         "waterwell.csi"
+#define LCT_WATERWELL_G         "waterwell"
+
 #define CST_CRICKET_1           240
 #define CST_CRICKET_1_G         "cricket1.csi"
 #define LCT_CRICKET_1_G         "cricket1"

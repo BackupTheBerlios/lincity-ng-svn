@@ -1048,6 +1048,15 @@ XXX: Then it shouldn't be here
 #define GROUP_RESIDENCE_HH_TECH 0
 #define GROUP_RESIDENCE_HH_FIREC 75
 
+#define GROUP_WATERWELL	   41
+#define GROUP_WATERWELL_COLOUR    (blue(31))
+#define GROUP_WATERWELL_COST      1
+#define GROUP_WATERWELL_COST_MUL 2
+#define GROUP_WATERWELL_BUL_COST      1
+#define GROUP_WATERWELL_TECH      0
+#define GROUP_WATERWELL_FIREC 0
+
+
 #define GROUP_IS_TRANSPORT(group) \
             ((group == GROUP_TRACK) || \
              (group == GROUP_ROAD) || \
@@ -1061,15 +1070,6 @@ XXX: Then it shouldn't be here
              (group == GROUP_RESIDENCE_LH) || \
              (group == GROUP_RESIDENCE_MH) || \
              (group == GROUP_RESIDENCE_HH))
-
-#define GROUP_RESIDENCE_LL 4
-#define GROUP_RESIDENCE_LL_COLOUR (cyan(24))
-#define GROUP_RESIDENCE_LL_COST 1000
-#define GROUP_RESIDENCE_LL_COST_MUL 25
-#define GROUP_RESIDENCE_LL_BUL_COST 1000
-#define GROUP_RESIDENCE_LL_TECH 0
-#define GROUP_RESIDENCE_LL_FIREC 75
-
 
 #define MOUSE_TYPE_NORMAL 1
 #define MOUSE_TYPE_SQUARE 2

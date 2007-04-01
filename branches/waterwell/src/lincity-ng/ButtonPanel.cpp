@@ -562,6 +562,8 @@ void ButtonPanel::showToolHelp( int tooltype ){
             getGame()->showHelpWindow( "park" ); break;
         case CST_WATER:
             getGame()->showHelpWindow( "river" ); break;
+        case CST_WATERWELL:
+            getGame()->showHelpWindow( "waterwell" ); break;
         default:
             std::cerr << "ButtonPanel::showToolHelp# unknown Type " << tooltype << "\n";
     }
@@ -617,6 +619,7 @@ void ButtonPanel::switchToTool( int newModuleType ){
         case CST_MONUMENT_0: newName ="BPMMonumentButton"; break;
         case CST_PARKLAND_PLANE: newName ="BPMParkButton"; break;
         case CST_WATER: newName ="BPMWaterButton"; break;
+        case CST_WATERWELL: newName ="BPMWaterwellButton"; break;
         default:
             std::cerr << "ButtonPanel::switchToTool# unknown Type " << newModuleType << "\n";
             newName ="BPMPointerButton";
@@ -890,6 +893,8 @@ void ButtonPanel::doButton(const std::string &button)
         selected_module_type=CST_PARKLAND_PLANE;
     else if(button=="BPMWaterButton")
         selected_module_type=CST_WATER;
+    else if(button=="BPMWaterwellButton")
+        selected_module_type=CST_WATERWELL;
 }
 
 void ButtonPanel::updateSelectedCost()
