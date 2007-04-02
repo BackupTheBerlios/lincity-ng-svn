@@ -230,7 +230,7 @@ void ButtonPanel::examineButton( std::string name, int showInfo ){
         return;
     }
     doButton( name );
-	if ( enoughTech( selected_module_type ) ){
+    if ( enoughTech( selected_module_type ) ){
         if( !b->isEnabled() ){
             newTechMessage( selected_module_type, showInfo );
             b->setTooltip( createTooltip( selected_module_type, false ) );

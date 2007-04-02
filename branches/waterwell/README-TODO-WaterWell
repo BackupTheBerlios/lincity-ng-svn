@@ -25,6 +25,12 @@ AIM:
 
 REMARKS:
 --------
+Don't consider this is important, it's just some ideas i have while wandering in the
+code. I write them here instead of somewhere else, but maybe will just forget them later.
 * Code contains obsolete stuff from old lincity (eg .csi references ...). Maybe a clean up should
  be considered, but that can be a big job with compatibility issues.
  (so in another branch, and later as far as i m concerned :-)
+* better separation of engine and graphics could be nice for future:
+   - a building gives: tech at build time, average state (production %) during last period
+   - the drawing modules uses the info to choose correct tile, and manage looping for
+     cleaner animation (currently fast speed skip frames => weird animation).

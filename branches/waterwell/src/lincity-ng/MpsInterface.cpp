@@ -213,6 +213,9 @@ void mps_refresh() /* refresh the information display's contents */
                 case GROUP_WINDMILL:
                     mps_windmill (mps_x, mps_y);
                     break;
+		case GROUP_WATERWELL:
+		    mps_waterwell (mps_x, mps_y);
+		    break;
                 default: 
                     //no special information on this group, just show the Name.
                     for(int i = 1; i < MPS_PARAGRAPH_COUNT; ++i) {
