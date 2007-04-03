@@ -142,6 +142,7 @@ place_item (int x, int y, short type)
     {
 	/* Don't build a tip if there has already been one.  If we succeed,
 	   mark the spot permanently by "doubling" the ore reserve */
+	/* AL1: in NG 1.1 tip cannot be bulldozed, so it seems impossible that this case happens */
 	int i,j;
 	int prev_tip = 0;
 	for (i=0;i<3;i++) {
@@ -198,6 +199,11 @@ place_item (int x, int y, short type)
 	    return -4;
 	}
     }
+    case GROUP_WATERWLL:
+    {
+	numof_waterwell++;
+    } break;
+
     } /* end case */
 
     /* Store last_built for refund on "mistakes" */
@@ -631,7 +637,7 @@ clear_fire_health_and_cricket_cover (void)
 {
   int x, y, m;
   m = 0xffffffff - (FLAG_FIRE_COVER | FLAG_HEALTH_COVER
-		    | FLAG_CRICKET_COVER);
+		    | FLAG_CRICKET_COVER| FLAG_WATERWELL_COVER);
   for (y = 0; y < WORLD_SIDE_LEN; y++)
     for (x = 0; x < WORLD_SIDE_LEN; x++)
       MP_INFO(x,y).flags &= m;
@@ -654,6 +660,8 @@ do_fire_health_and_cricket_cover (void)
 	  do_health_cover (x, y);
 	else if (MP_GROUP(x,y) == GROUP_CRICKET)
 	  do_cricket_cover (x, y);
+	else if (MP_GROUP(x,y) == GROUP_WATERWELL)
+	  do_waterwell_cover (x, y);
       }
 }
 

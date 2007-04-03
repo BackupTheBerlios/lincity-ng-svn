@@ -170,9 +170,10 @@ XXX: Then it shouldn't be here
 #define FLAG_CRICKET_COVER      (0x400000)
 #define FLAG_IS_RIVER           (0x800000)
 #define FLAG_HAD_POWER          (0x1000000)
-#define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */
-#define FLAG_MULTI_TRANS_PREV   (0x4000000)
+#define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */ /* AL1: unused in NG 1.1 */
+#define FLAG_MULTI_TRANS_PREV   (0x4000000)	/* AL1: unused in NG 1.1 */
 #define FLAG_POWER_LINE         (0x8000000)
+#define FLAG_WATERWELL_COVER    (0x10000000)
 
 /* XXX: It would appear that the following T_ are used exactly two times each,
    in market.c.  */
@@ -554,13 +555,15 @@ XXX: Then it shouldn't be here
 #define MAX_ORE_IN_MARKET (MAX_ORE_ON_RAIL*2)
 #define MARKET_ORE_SEARCH_TRIGGER (MAX_ORE_IN_MARKET/5)
 
-
 #define MAX_STEEL_ON_TRACK 128
 #define MAX_STEEL_ON_RIVER (MAX_STEEL_ON_TRACK*2)
 #define MAX_STEEL_ON_ROAD (MAX_STEEL_ON_TRACK*4)
 #define MAX_STEEL_ON_RAIL (MAX_STEEL_ON_ROAD*4)
 #define RAIL_STEEL_USED_MASK 0x7f
 #define MAX_STEEL_AT_INDUSTRY_H (MAX_STEEL_ON_RAIL*10)
+
+#define WATERWELL_RANGE 10
+
 /*
   JOBS_MAKE_STEEL is the steel made per job at the steel works
   what's it doing here?
@@ -1352,6 +1355,7 @@ extern void update_shanty (void);
 extern void do_shanty (int, int);
 extern void do_tip (int, int);
 extern void update_tech_dep (int, int);
+extern void do_waterwell_cover (int, int);
 /*
    transport functions
    *******************

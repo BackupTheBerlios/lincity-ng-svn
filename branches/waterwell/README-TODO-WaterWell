@@ -1,36 +1,76 @@
 README:
 -------
-Attempt to implement some kind of water management
+Attempt to implement some kind of water management.
+This file is a temporary note book.
+
+WIP:
+----
+Rev 1170: basic water management implemented:
+ -icon, tile (hmmm, must be redrawn by someone competent)
+ -help (en), info with query tool and in residences.
+ -residence need water like food. Lack of water has the same consequences as lack of food.
+ -random village has a water well.
 
 TODO: 
 -----
-- transport capacity for water
-- show well's range in starvation window (<= market range)
-- add water management for residence (like food)
-- add water well to random village
-
-- think of how to import existing games without killing all population by thirstyness.
-  (maybe just add a new version to check at load time if water management should be enabled)
+* show well's range in starvation window (<= market range)
+* load/save numof_waterwell and display it in stat window. (current load/save works)
 
 AIM:
 ----
 * Water availability can be computed from the initial map, from shortest distance
     to navigable water. Area without water should be yellow-brown like desert.
     Areas without water would need high-tech deep well and/or pipes to feed the water station.
-* Water quality (from drinkable to mortal). 
-* farms, industries also need water (connection needed?, or pipes?), and can pollute it
-* park along a river or around a well will also reduce the pollution.
-* pollution transported by river will follow the flow, so travel toward the bottom
-    of the map (roughtly oposite of win direction :-) 
 
-REMARKS:
---------
+* farms, industries also need water (connection needed?, or pipes?), and can pollute it
+
+* Water quality (from drinkable to mortal). 
+  - park along a river or around a well will also reduce the pollution.
+  - pollution transported by river will follow the flow, so travel toward the bottom
+      of the map (roughtly oposite of win direction :-)
+
+* think of how to import existing games without killing all population by thirstyness.
+  (maybe just add a new version to check at load time if water management should be enabled)
+
+Won't do soon:
+--------------
+* transport capacity for water = water_on_road, water_on rail.... ?
+  This mean quantity management of water. can be very tricky.
+  rev 1170 uses range, so no need for transport
+  ? market can buy/sell water ? or waterwell is a watermarket ? 
+
+REMARKS/NOTES:
+--------------
 Don't consider this is important, it's just some ideas i have while wandering in the
-code. I write them here instead of somewhere else, but maybe will just forget them later.
+code. I write them here instead of somewhere else, but maybe i will just forget them later,
+or put them in the wiki.
+
+* random village is placed near water in original lincity :) 
+  (see src/lincity/simulate.cpp random_start near line 610)
+
 * Code contains obsolete stuff from old lincity (eg .csi references ...). Maybe a clean up should
  be considered, but that can be a big job with compatibility issues.
  (so in another branch, and later as far as i m concerned :-)
+
 * better separation of engine and graphics could be nice for future:
    - a building gives: tech at build time, average state (production %) during last period
    - the drawing modules uses the info to choose correct tile, and manage looping for
      cleaner animation (currently fast speed skip frames => weird animation).
+
+* rivers are ready for transport: in lin-city.h  
+  #define MAX_FOOD_ON_RIVER (MAX_FOOD_ON_TRACK*2)
+  #define MAX_JOBS_ON_RIVER (MAX_JOBS_ON_TRACK*2)
+  #define MAX_COAL_ON_RIVER (MAX_COAL_ON_TRACK*2)
+  #define MAX_GOODS_ON_RIVER (MAX_GOODS_ON_TRACK*2)
+  #define MAX_ORE_ON_RIVER (MAX_ORE_ON_TRACK*2)
+  #define MAX_STEEL_ON_RIVER (MAX_STEEL_ON_TRACK*2)
+
+  but are not in GROUP_IS_TRANSPORT.
+  #define GROUP_IS_TRANSPORT(group) \
+            ((group == GROUP_TRACK) || \
+             (group == GROUP_ROAD) || \
+             (group == GROUP_RAIL) || \
+             (group == GROUP_POWER_LINE))
+
+  Beach scenario could cause trouble (stock many thing in the sea !).
+

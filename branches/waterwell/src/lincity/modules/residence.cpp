@@ -68,9 +68,9 @@ do_residence (int x, int y)
 	    bad += 100;
 	}
     }
-    /* normal births - must have food and jobs... and people */
-    if ((MP_INFO(x,y).flags & (FLAG_FED + FLAG_EMPLOYED))
-	== (FLAG_FED + FLAG_EMPLOYED)
+    /* normal births - must have food, water and jobs... and people */
+    if ((MP_INFO(x,y).flags & (FLAG_FED + FLAG_WATERWELL_COVER + FLAG_EMPLOYED))
+	== (FLAG_FED + FLAG_WATERWELL_COVER+ FLAG_EMPLOYED)
 	&& (rand () % (RESIDENCE_BASE_BR + MP_INFO(x,y).int_4) == 1) 
 	&& p > 0)
     {
@@ -78,8 +78,8 @@ do_residence (int x, int y)
 	total_births++;
 	good += 50;
     }
-    /* are people starving. */
-    if ((MP_INFO(x,y).flags & FLAG_FED) == 0 && p > 0)
+    /* are people starving or lacking water ? */
+    if ( ((MP_INFO(x,y).flags & FLAG_FED) == 0 | (MP_INFO(x,y).flags & FLAG_WATERWELL_COVER) == 0) && p > 0)
     {
 	if (rand () % DAYS_PER_STARVE == 1)
 	{
@@ -180,7 +180,7 @@ do_residence (int x, int y)
 	if ((MP_INFO(x,y).flags & FLAG_HAD_POWER) != 0)
 	    bad += 50;
     }
-    /* now get fed */
+    /* now get fed */  /* AL1: should be done earlier, before check for starvation */
     if (get_food (x, y, p) != 0)
     {
 	MP_INFO(x,y).flags |= FLAG_FED;
@@ -188,6 +188,7 @@ do_residence (int x, int y)
     }
     else
 	MP_INFO(x,y).flags &= (0xffffffff - FLAG_FED);
+
     /* now supply jobs and buy goods if employed */
     if (MP_INFO(x,y).int_1 > 0)
 	swing = JOB_SWING + (hc * HC_JOB_SWING) + cc;
@@ -276,14 +277,20 @@ mps_residence (int x, int y)
 
     mps_store_sd(i++,_("People"), MP_INFO(x,y).population);
 
-    p = ((MP_INFO(x,y).flags & FLAG_POWERED) != 0) ? _("YES") : _("NO");
-    mps_store_ss(i++, _("Power"), p);
+    p = ((MP_INFO(x,y).flags & FLAG_WATERWELL_COVER) != 0) ? _("YES") : _("NO");
+    mps_store_ss(i++, _("Water"), p);
 
     p = ((MP_INFO(x,y).flags & FLAG_FED) != 0) ? _("YES") : _("NO");
     mps_store_ss(i++, _("Fed"), p);
 
+    p = ((MP_INFO(x,y).flags & FLAG_POWERED) != 0) ? _("YES") : _("NO");
+    mps_store_ss(i++, _("Power"), p);
+
     p = ((MP_INFO(x,y).flags & FLAG_EMPLOYED) != 0) ? _("YES") : _("NO");
     mps_store_ss(i++, _("Employed"), p);
+
+    p = (MP_INFO(x,y).int_1 >= 10) ? _("good") : _("poor");
+    mps_store_ss(i++, _("Job"), p);
 
     p = ((MP_INFO(x,y).flags & FLAG_HEALTH_COVER) != 0) ? _("YES") : _("NO");
     mps_store_ss(i++, _("Health Cvr"), p);
@@ -295,8 +302,5 @@ mps_residence (int x, int y)
     mps_store_ss(i++, _("Sport"), p);
 
     mps_store_sd(i++, _("Pollution"), MP_POL(x,y));
-
-    p = (MP_INFO(x,y).int_1 >= 10) ? _("good") : _("poor");
-    mps_store_ss(i++, _("Job"), p);
 
 }

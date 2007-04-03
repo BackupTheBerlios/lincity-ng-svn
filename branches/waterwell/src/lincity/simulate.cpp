@@ -640,34 +640,24 @@ random_start (int* originx, int* originy)
     quick_start_add (xx + 5, yy + 5, CST_FARM_O0, 4);
     quick_start_add (xx + 9, yy + 6, CST_RESIDENCE_ML, 3);
     MP_INFO(xx + 9,yy + 6).population = 50;
-    MP_INFO(xx + 9,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED);
-    quick_start_add (xx + 7, yy + 9, CST_MARKET_EMPTY, 2);
-    marketx[numof_markets] = xx + 7;
-    markety[numof_markets] = yy + 9;
-    numof_markets++;
-    /* Bootstap markets with some stuff. */
-    MP_INFO(xx + 7,yy + 9).int_1 = 2000;
-    MP_INFO(xx + 7,yy + 9).int_2 = 10000;
-    MP_INFO(xx + 7,yy + 9).int_3 = 100;
-    MP_INFO(xx + 7,yy + 9).int_5 = 10000;
-    MP_INFO(xx + 7,yy + 9).flags 
-	    |= (FLAG_MB_FOOD + FLAG_MS_FOOD + FLAG_MB_JOBS
-		+ FLAG_MS_JOBS + FLAG_MB_COAL + FLAG_MS_COAL + FLAG_MB_ORE
-		+ FLAG_MS_ORE + FLAG_MB_GOODS + FLAG_MS_GOODS + FLAG_MB_STEEL
-		+ FLAG_MS_STEEL);
-
+    MP_INFO(xx + 9,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
+    quick_start_add (xx + 9, yy + 9, CST_POTTERY_0, 2);
+    quick_start_add (xx + 16, yy + 9, CST_WATERWELL, 2);
 
     quick_start_add (xx + 14, yy + 6, CST_RESIDENCE_ML, 3);
     MP_INFO(xx + 14,yy + 6).population = 50;
-    MP_INFO(xx + 14,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED);
+    MP_INFO(xx + 14,yy + 6).flags |= (FLAG_FED + FLAG_EMPLOYED + FLAG_WATERWELL_COVER);
     quick_start_add (xx + 17, yy + 5, CST_FARM_O0, 4);
-    quick_start_add (xx + 17, yy + 9, CST_MARKET_EMPTY, 2);
-    marketx[numof_markets] = xx + 17;
+    quick_start_add (xx + 14, yy + 9, CST_MARKET_EMPTY, 2);
+    marketx[numof_markets] = xx + 14;
     markety[numof_markets] = yy + 9;
     numof_markets++;
-    MP_INFO(xx + 17,yy + 9).int_1 = 2000;
-    MP_INFO(xx + 17,yy + 9).int_2 = 8000;
-    MP_INFO(xx + 17,yy + 9).flags 
+    /* Bootstrap markets with some stuff. */
+    MP_INFO(xx + 14,yy + 9).int_1 = 2000;
+    MP_INFO(xx + 14,yy + 9).int_2 = 10000;
+    MP_INFO(xx + 14,yy + 9).int_3 = 100;
+    MP_INFO(xx + 14,yy + 9).int_5 = 10000;
+    MP_INFO(xx + 14,yy + 9).flags 
 	    |= (FLAG_MB_FOOD + FLAG_MS_FOOD + FLAG_MB_JOBS
 		+ FLAG_MS_JOBS + FLAG_MB_COAL + FLAG_MS_COAL + FLAG_MB_ORE
 		+ FLAG_MS_ORE + FLAG_MB_GOODS + FLAG_MS_GOODS + FLAG_MB_STEEL
@@ -678,35 +668,12 @@ random_start (int* originx, int* originy)
 	quick_start_add (xx + x, yy + 11, CST_TRACK_LR, 1);
 	MP_INFO(xx + x,yy + 11).flags |= FLAG_IS_TRANSPORT;
     }
-    for (y = 12; y < 18; y++)
-    {
-	quick_start_add (xx + 5, yy + y, CST_TRACK_LR, 1);
-	MP_INFO(xx + 5,yy + y).flags |= FLAG_IS_TRANSPORT;
-    }
     quick_start_add (xx + 6, yy + 12, CST_COMMUNE_1, 4);
     quick_start_add (xx + 6, yy + 17, CST_COMMUNE_1, 4);
     quick_start_add (xx + 11, yy + 12, CST_COMMUNE_1, 4);
     quick_start_add (xx + 11, yy + 17, CST_COMMUNE_1, 4);
     quick_start_add (xx + 16, yy + 12, CST_COMMUNE_1, 4);
     quick_start_add (xx + 16, yy + 17, CST_COMMUNE_1, 4);
-    for (x = 6; x < 17; x++)
-    {
-	quick_start_add (xx + x, yy + 16, CST_TRACK_LR, 1);
-	MP_INFO(xx + x,yy + 16).flags |= FLAG_IS_TRANSPORT;
-    }
-    for (y = 12; y < 16; y++)
-    {
-	quick_start_add (xx + 10, yy + y, CST_TRACK_LR, 1);
-	MP_INFO(xx + 10,yy + y).flags |= FLAG_IS_TRANSPORT;
-	quick_start_add (xx + 15, yy + y, CST_TRACK_LR, 1);
-	MP_INFO(xx + 15,yy + y).flags |= FLAG_IS_TRANSPORT;
-    }
-    quick_start_add (xx + 10, yy + 17, CST_TRACK_LR, 1);
-    MP_INFO(xx + 10,yy + 17).flags |= FLAG_IS_TRANSPORT;
-    quick_start_add (xx + 15, yy + 17, CST_TRACK_LR, 1);
-    MP_INFO(xx + 15,yy + 17).flags |= FLAG_IS_TRANSPORT;
-
-    quick_start_add (xx + 9, yy + 9, CST_POTTERY_0, 2);
 }
 
 /* XXX: WCK: What is up with this?  Why not just use set_mappoint?! */

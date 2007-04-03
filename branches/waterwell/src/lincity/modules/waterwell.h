@@ -8,6 +8,7 @@
 #ifndef __waterwell_h__
 #define __waterwell_h__
 
+void do_waterwell_cover (int x, int y);
 void mps_waterwell (int x, int y);
 
 #endif /* __waterwell_h__ */

@@ -52,6 +52,7 @@ extern int substationx[MAX_NUMOF_SUBSTATIONS], substationy[MAX_NUMOF_SUBSTATIONS
 extern int numof_substations;
 extern int marketx[MAX_NUMOF_MARKETS], markety[MAX_NUMOF_MARKETS], numof_markets;
 extern int numof_health_centres, max_pop_ever, total_evacuated, total_births;
+extern int numof_waterwell;
 
 extern int total_money, income_tax_rate, coal_tax_rate;
 extern int dole_rate, transport_cost_rate;
