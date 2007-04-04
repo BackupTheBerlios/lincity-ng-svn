@@ -14,6 +14,7 @@ Rev 1170: basic water management implemented:
  -help (en), info with query tool and in residences.
  -residence need water like food. Lack of water has the same consequences as lack of food.
  -random village has a water well.
+ -random terrain instead of uniform empty green land.
 
 TODO: 
 -----
