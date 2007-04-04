@@ -14,7 +14,7 @@
 #endif
 
 #define NUM_OF_TYPES    400
-#define NUM_OF_GROUPS    43
+#define NUM_OF_GROUPS    47
 #define GROUP_NAME_LEN   20
 
 struct GROUP

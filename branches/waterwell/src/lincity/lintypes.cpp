@@ -526,7 +526,59 @@ struct GROUP main_groups[NUM_OF_GROUPS] =
       GROUP_WATERWELL_COST,
       GROUP_WATERWELL_TECH
     },
+
     /* 42 */
+    { N_("Desert"),       	/* name */
+      FALSE,            	/* need credit? */
+      GROUP_DESERT,       	/* group number */
+      1,                	/* size */
+      GROUP_DESERT_COLOUR,      /* color */
+      GROUP_DESERT_COST_MUL,	/* cost multiplier */
+      GROUP_DESERT_BUL_COST,	/* bulldoze cost */
+      GROUP_DESERT_FIREC,	/* probability of fire */
+      GROUP_DESERT_COST,	/* cost */
+      GROUP_DESERT_TECH		/* tech */
+    },
+    /* 43 */
+    { N_("Tree"),       	/* name */
+      FALSE,            	/* need credit? */
+      GROUP_TREE,       	/* group number */
+      1,                	/* size */
+      GROUP_TREE_COLOUR,	/* color */
+      GROUP_TREE_COST_MUL,	/* cost multiplier */
+      GROUP_TREE_BUL_COST,	/* bulldoze cost */
+      GROUP_TREE_FIREC,		/* probability of fire */
+      GROUP_TREE_COST,		/* cost */
+      GROUP_TREE_TECH		/* tech */
+    },
+
+    /* 44 */
+    { N_("Trees"),       	/* name */
+      FALSE,            	/* need credit? */
+      GROUP_TREE2,       	/* group number */
+      1,                	/* size */
+      GROUP_TREE2_COLOUR,	/* color */
+      GROUP_TREE2_COST_MUL,	/* cost multiplier */
+      GROUP_TREE2_BUL_COST,	/* bulldoze cost */
+      GROUP_TREE2_FIREC,	/* probability of fire */
+      GROUP_TREE2_COST,		/* cost */
+      GROUP_TREE2_TECH		/* tech */
+    },
+
+    /* 45 */
+    { N_("Forest"),       	/* name */
+      FALSE,            	/* need credit? */
+      GROUP_TREE3,       	/* group number */
+      1,                	/* size */
+      GROUP_TREE3_COLOUR,	/* color */
+      GROUP_TREE3_COST_MUL,	/* cost multiplier */
+      GROUP_TREE3_BUL_COST,	/* bulldoze cost */
+      GROUP_TREE3_FIREC,	/* probability of fire */
+      GROUP_TREE3_COST,		/* cost */
+      GROUP_TREE3_TECH		/* tech */
+    },
+
+    /* 46 */
     /* End of Data */
     { "EOF",
       FALSE,                           /* need credit? */

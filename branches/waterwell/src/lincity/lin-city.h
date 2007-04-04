@@ -1059,6 +1059,38 @@ XXX: Then it shouldn't be here
 #define GROUP_WATERWELL_TECH      0
 #define GROUP_WATERWELL_FIREC 0
 
+#define GROUP_DESERT 	  42 
+#define GROUP_DESERT_COLOUR  (yellow(18))
+#define GROUP_DESERT_COST    0
+#define GROUP_DESERT_COST_MUL 1
+#define GROUP_DESERT_BUL_COST 1
+#define GROUP_DESERT_TECH    0
+#define GROUP_DESERT_FIREC   0
+
+#define GROUP_TREE 	   43
+#define GROUP_TREE_COLOUR  (green(12))
+#define GROUP_TREE_COST    0
+#define GROUP_TREE_COST_MUL 1
+#define GROUP_TREE_BUL_COST 1
+#define GROUP_TREE_TECH    0
+#define GROUP_TREE_FIREC   0
+
+#define GROUP_TREE2 	   44
+#define GROUP_TREE2_COLOUR  (green(12))
+#define GROUP_TREE2_COST    0
+#define GROUP_TREE2_COST_MUL 1
+#define GROUP_TREE2_BUL_COST 1
+#define GROUP_TREE2_TECH    0
+#define GROUP_TREE2_FIREC   0
+
+#define GROUP_TREE3 	   45
+#define GROUP_TREE3_COLOUR  (green(12))
+#define GROUP_TREE3_COST    0
+#define GROUP_TREE3_COST_MUL 1
+#define GROUP_TREE3_BUL_COST 1
+#define GROUP_TREE3_TECH    0
+#define GROUP_TREE3_FIREC   0
+
 
 #define GROUP_IS_TRANSPORT(group) \
             ((group == GROUP_TRACK) || \
@@ -1073,6 +1105,13 @@ XXX: Then it shouldn't be here
              (group == GROUP_RESIDENCE_LH) || \
              (group == GROUP_RESIDENCE_MH) || \
              (group == GROUP_RESIDENCE_HH))
+
+#define GROUP_IS_BARE(group) \
+	    ((group == GROUP_BARE) || \
+	     (group == GROUP_DESERT) || \
+	     (group == GROUP_TREE) || \
+	     (group == GROUP_TREE2) || \
+	     (group == GROUP_TREE3))
 
 #define MOUSE_TYPE_NORMAL 1
 #define MOUSE_TYPE_SQUARE 2

@@ -113,7 +113,7 @@ simulate_mappoints (void)
 	for (xx = 0; xx < WORLD_SIDE_LEN; xx++) {
 	    int x = mappoint_array_x[xx];
 	    short grp = MP_GROUP(x,y);
-	    if (grp == GROUP_USED || grp == GROUP_BARE)
+	    if (grp == GROUP_USED || GROUP_IS_BARE(grp))
 		continue;
 	    switch (grp) {
 	    case GROUP_TRACK:
@@ -424,7 +424,18 @@ clear_game (void)
     int x, y;
     for (y = 0; y < WORLD_SIDE_LEN; y++) {
 	for (x = 0; x < WORLD_SIDE_LEN; x++) {
-	    clear_mappoint (CST_GREEN, x, y);
+	    int r = rand () %5;
+	    if (r == 0)
+	    	clear_mappoint (CST_DESERT, x, y);
+	    else if (r == 1)
+	    	clear_mappoint (CST_GREEN, x, y);
+	    else if (r == 2)
+	    	clear_mappoint (CST_TREE, x, y);
+	    else if (r == 3)
+	    	clear_mappoint (CST_TREE2, x, y);
+	    else if (r == 4)
+	    	clear_mappoint (CST_TREE3, x, y);
+
 	    MP_POL(x,y) = 0;
 	}
     }
@@ -548,8 +559,8 @@ setup_river2 (int x, int y, int d)
 	else if (r > 1)
 	    r = 1;
 	x += r;
-	if (MP_TYPE(x+(d+d),y) != 0
-	    || MP_TYPE(x+(d+d+d),y) != 0)
+	if (!GROUP_IS_BARE(MP_GROUP(x+(d+d),y))
+	    || !GROUP_IS_BARE(MP_GROUP(x+(d+d+d),y)) )
 	    return;
 	if (x > 5 && x < WORLD_SIDE_LEN - 5)
 	{
@@ -594,7 +605,7 @@ count_all_groups (int* group_count)
     for (y = 0; y < WORLD_SIDE_LEN; y++) {
 	for (x = 0; x < WORLD_SIDE_LEN; x++) {
 	    t = MP_TYPE(x,y);
-	    if (t != CST_USED && t != CST_GREEN) {
+	    if (t != CST_USED && !GROUP_IS_BARE(MP_GROUP(x,y)))  {
 		g = get_group_of_type(t);
 		group_count[g]++;
 	    }
@@ -625,7 +636,7 @@ random_start (int* originx, int* originy)
 	} while (flag == 0 || (--watchdog) < 1);
 	for (y = yy + 4; y < yy + 22; y++)
 	    for (x = xx + 4; x < xx + 22; x++)
-		if (MP_GROUP(x,y) != GROUP_BARE) {
+		if ( !GROUP_IS_BARE(MP_GROUP(x,y)) ) {
 		    flag = 0;
 		    x = xx + 22;   /* break out of loop */
 		    y = yy + 22;   /* break out of loop */
@@ -774,7 +785,7 @@ sust_fire_cover (void)
   for (x = 0; x < WORLD_SIDE_LEN; x++)
     for (y = 0; y < WORLD_SIDE_LEN; y++)
       {
-	if (MP_GROUP(x,y) == GROUP_BARE
+	if (GROUP_IS_BARE(MP_GROUP(x,y))
 	    || MP_TYPE(x,y) == CST_USED
 	    || MP_GROUP(x,y) == GROUP_WATER
 	    || MP_GROUP(x,y) == GROUP_POWER_LINE

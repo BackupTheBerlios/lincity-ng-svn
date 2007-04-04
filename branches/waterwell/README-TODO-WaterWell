@@ -3,6 +3,10 @@ README:
 Attempt to implement some kind of water management.
 This file is a temporary note book.
 
+HELP NEEDED:
+------------
+- Better graphic for icon and tile. (i did my best but its not enough ;-)
+
 WIP:
 ----
 Rev 1170: basic water management implemented:
@@ -15,29 +19,39 @@ TODO:
 -----
 * show well's range in starvation window (<= market range)
 * load/save numof_waterwell and display it in stat window. (current load/save works)
+* sound.
+* basic ecology : desert, green, tree, tree2, tree3, % depending on water proximity.
+
 
 AIM:
 ----
-* Water availability can be computed from the initial map, from shortest distance
-    to navigable water. Area without water should be yellow-brown like desert.
-    Areas without water would need high-tech deep well and/or pipes to feed the water station.
+* simple ecology = periodic event :
+   - neighbours  => % decrease/increase from desert to tree3. (tree3 need 4 neighbouring trees)
+   - pollution ++%decrease
+   - water ++%increase
+   = just look nicer (change nothing in the game) but could show impact of human activities on forests :)
 
-* farms, industries also need water (connection needed?, or pipes?), and can pollute it
+* farms, industries also need water (connection needed?, or pipes?)
 
-* Water quality (from drinkable to mortal). 
+* Water quality (from drinkable to mortal).
+  - residences, farms and industries can pollute water.
   - park along a river or around a well will also reduce the pollution.
   - pollution transported by river will follow the flow, so travel toward the bottom
-      of the map (roughtly oposite of win direction :-)
+      of the map (y++) (roughtly opposite of win direction :-)
 
 * think of how to import existing games without killing all population by thirstyness.
   (maybe just add a new version to check at load time if water management should be enabled)
 
 Won't do soon:
 --------------
+* Areas without water could need high-tech deep well and/or pipes to feed the water station.
+
 * transport capacity for water = water_on_road, water_on rail.... ?
-  This mean quantity management of water. can be very tricky.
-  rev 1170 uses range, so no need for transport
+  This mean quantity management of water. can be very tricky in addition to quality.
+  rev 1170 uses range, so no need for transport.
   ? market can buy/sell water ? or waterwell is a watermarket ? 
+
+* fire/health cover in dry area should cost more (need more equipment ...)
 
 REMARKS/NOTES:
 --------------
@@ -57,6 +71,7 @@ or put them in the wiki.
    - the drawing modules uses the info to choose correct tile, and manage looping for
      cleaner animation (currently fast speed skip frames => weird animation).
 
+* With market range, everything can already jump accross rivers.
 * rivers are ready for transport: in lin-city.h  
   #define MAX_FOOD_ON_RIVER (MAX_FOOD_ON_TRACK*2)
   #define MAX_JOBS_ON_RIVER (MAX_JOBS_ON_TRACK*2)
@@ -71,6 +86,16 @@ or put them in the wiki.
              (group == GROUP_ROAD) || \
              (group == GROUP_RAIL) || \
              (group == GROUP_POWER_LINE))
-
   Beach scenario could cause trouble (stock many thing in the sea !).
+
+* Parks are not entertainment parks. They are biological depollution tool
+ => they are build in very polluted areas (sometimes mortal)
+ => no child games should appear there!
+
+* Parks appear too early, when they are not needed.
+
+* Graphic before rail techlevel should not have cars, but horses and bullocks instead.
+* Low tech houses looks too modern.
+
+* non-navigable waters (not seas) could very slowly become green (less than 1/1000 chance per year)
 

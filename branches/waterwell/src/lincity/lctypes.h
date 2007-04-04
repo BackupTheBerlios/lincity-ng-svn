@@ -882,6 +882,15 @@
 #define CST_FARM_O16_G           "farm16.csi"
 #define LCT_FARM_O16_G           "farm16"
 
+#define CST_DESERT		350
+#define LCT_DESERT_G		"desert"
+#define CST_TREE		351
+#define LCT_TREE_G		"tree"
+#define CST_TREE2		352
+#define LCT_TREE2_G		"tree2"
+#define CST_TREE3		353
+#define LCT_TREE3_G		"tree3"
+
 #define CST_NONE 1000
 
 /*

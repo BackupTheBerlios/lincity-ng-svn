@@ -223,7 +223,7 @@ void mps_refresh() /* refresh the information display's contents */
                     }
                     mps_store_title(0, 
                             _(main_groups[MP_GROUP(mps_x, mps_y)].name));
-                    if( MP_TYPE( mps_x, mps_y ) == CST_GREEN ){
+                    if( GROUP_IS_BARE(MP_GROUP( mps_x, mps_y )) ){
                         mps_store_title(4,_("build something here") );
                     }
                     mps_store_title(2, _("no further information available") );

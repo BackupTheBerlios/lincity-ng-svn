@@ -481,6 +481,10 @@ void GameView::loadTextures()
            -e 's/"/.png" );/2'                 
    */
    preReadCityTexture( CST_GREEN, 	"green.png" );
+   preReadCityTexture( CST_DESERT, 	"desert.png" );
+   preReadCityTexture( CST_TREE, 	"tree.png" );
+   preReadCityTexture( CST_TREE2, 	"tree2.png" );
+   preReadCityTexture( CST_TREE3, 	"tree3.png" );
    preReadCityTexture( CST_POWERL_H_L, "powerlhl.png" );
    preReadCityTexture( CST_POWERL_V_L,  	"powerlvl.png" );
    preReadCityTexture( CST_POWERL_LD_L, 	"powerlldl.png" );
@@ -1365,7 +1369,7 @@ void GameView::markTile( Painter& painter, MapPoint tile )
         } else {
             for( y = (int) tile.y; y < tile.y + cursorSize; y++ ) {
                 for( x = (int) tile.x; x < tile.x + cursorSize; x++ ) {
-                    if( MP_TYPE( x, y ) != CST_GREEN ) {
+                    if( MP_TYPE( x, y ) != CST_DESERT ) {
                         painter.setFillColor( alphared );
                         y += cursorSize;
                         break;

@@ -199,7 +199,7 @@ place_item (int x, int y, short type)
 	    return -4;
 	}
     }
-    case GROUP_WATERWLL:
+    case GROUP_WATERWELL:
     {
 	numof_waterwell++;
     } break;
@@ -265,7 +265,7 @@ bulldoze_item (int x, int y)
     size = MP_SIZE(x,y);
     g = MP_GROUP(x,y);
 
-    if (g == GROUP_BARE) {
+    if (g == GROUP_DESERT) {
 	/* Nothing to do. */
 	return -1;
     }
@@ -283,7 +283,7 @@ bulldoze_item (int x, int y)
     }
     else {
 	adjust_money(-main_groups[g].bul_cost);
-	do_bulldoze_area (CST_GREEN, x, y);
+	do_bulldoze_area (CST_DESERT, x, y);
 	if (g == GROUP_OREMINE)
 	{
 	    int i, j;
@@ -520,7 +520,7 @@ do_pollution ()
 	  p = *pol / 16;
 	  *pol -= p;
 	  switch ( rand() % 11)
-	    {         /* prevailing wind is *from* SW ie right down */
+	    {         /* prevailing wind is *from* SW */
 	    case 0:
 	    case 1: /* up */
 	    case 2:
@@ -823,10 +823,10 @@ spiral_find_2x2 (int startx, int starty)
 	  x--;
 	  if (x > 1 && x < WORLD_SIDE_LEN - 2 && y > 1
 	      && y < WORLD_SIDE_LEN - 2)
-	    if (MP_TYPE(x,y) == CST_GREEN
-		&& MP_TYPE(x + 1,y) == CST_GREEN
-		&& MP_TYPE(x,y + 1) == CST_GREEN
-		&& MP_TYPE(x + 1,y + 1) == CST_GREEN)
+	    if (GROUP_IS_BARE(MP_GROUP(x,y))
+		&& GROUP_IS_BARE(MP_GROUP(x + 1,y))
+		&& GROUP_IS_BARE(MP_GROUP(x,y + 1))
+		&& GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)) )
 	      return (x + y * WORLD_SIDE_LEN);
 	}
       for (j = 0; j < i; j++)
@@ -834,10 +834,10 @@ spiral_find_2x2 (int startx, int starty)
 	  y--;
 	  if (x > 1 && x < WORLD_SIDE_LEN - 2 && y > 1
 	      && y < WORLD_SIDE_LEN - 2)
-	    if (MP_TYPE(x,y) == CST_GREEN
-		&& MP_TYPE(x + 1,y) == CST_GREEN
-		&& MP_TYPE(x,y + 1) == CST_GREEN
-		&& MP_TYPE(x + 1,y + 1) == CST_GREEN)
+	    if (GROUP_IS_BARE(MP_GROUP(x,y))
+		&& GROUP_IS_BARE(MP_GROUP(x + 1,y))
+		&& GROUP_IS_BARE(MP_GROUP(x,y + 1))
+		&& GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
 	      return (x + y * WORLD_SIDE_LEN);
 	}
       i++;
@@ -846,10 +846,10 @@ spiral_find_2x2 (int startx, int starty)
 	  x++;
 	  if (x > 1 && x < WORLD_SIDE_LEN - 2 && y > 1
 	      && y < WORLD_SIDE_LEN - 2)
-	    if (MP_TYPE(x,y) == CST_GREEN
-		&& MP_TYPE(x + 1,y) == CST_GREEN
-		&& MP_TYPE(x,y + 1) == CST_GREEN
-		&& MP_TYPE(x + 1,y + 1) == CST_GREEN)
+	    if (GROUP_IS_BARE(MP_GROUP(x,y))
+		&& GROUP_IS_BARE(MP_GROUP(x + 1,y))
+		&& GROUP_IS_BARE(MP_GROUP(x,y + 1))
+		&& GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
 	      return (x + y * WORLD_SIDE_LEN);
 	}
       for (j = 0; j < i; j++)
@@ -857,10 +857,10 @@ spiral_find_2x2 (int startx, int starty)
 	  y++;
 	  if (x > 1 && x < WORLD_SIDE_LEN - 2 && y > 1
 	      && y < WORLD_SIDE_LEN - 2)
-	    if (MP_TYPE(x,y) == CST_GREEN
-		&& MP_TYPE(x + 1,y) == CST_GREEN
-		&& MP_TYPE(x,y + 1) == CST_GREEN
-		&& MP_TYPE(x + 1,y + 1) == CST_GREEN)
+	    if (GROUP_IS_BARE(MP_GROUP(x,y))
+		&& GROUP_IS_BARE(MP_GROUP(x + 1,y))
+		&& GROUP_IS_BARE(MP_GROUP(x,y + 1))
+		&& GROUP_IS_BARE(MP_GROUP(x + 1,y + 1)))
 	      return (x + y * WORLD_SIDE_LEN);
 	}
     }
