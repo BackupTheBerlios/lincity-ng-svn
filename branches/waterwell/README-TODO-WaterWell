@@ -9,12 +9,13 @@ HELP NEEDED:
 
 WIP:
 ----
-Rev 1170: basic water management implemented:
+1170: basic water management implemented:
  -icon, tile (hmmm, must be redrawn by someone competent)
  -help (en), info with query tool and in residences.
  -residence need water like food. Lack of water has the same consequences as lack of food.
  -random village has a water well.
- -random terrain instead of uniform empty green land.
+1174:
+ -not-so-random terrain depending on distance to water (instead of uniform empty green land.)
 
 TODO: 
 -----
@@ -38,7 +39,7 @@ AIM:
   - residences, farms and industries can pollute water.
   - park along a river or around a well will also reduce the pollution.
   - pollution transported by river will follow the flow, so travel toward the bottom
-      of the map (y++) (roughtly opposite of win direction :-)
+      of the map (y++) (roughtly opposite of wind direction :-)
 
 * think of how to import existing games without killing all population by thirstyness.
   (maybe just add a new version to check at load time if water management should be enabled)

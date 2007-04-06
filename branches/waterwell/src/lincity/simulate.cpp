@@ -49,6 +49,7 @@ static void end_of_year_update (void);
 static void random_start (int* originx, int* originy);
 static void simulate_mappoints (void);
 static void quick_start_add (int x, int y, short type, int size);
+static void setup_land (void);
 
 /* ---------------------------------------------------------------------- *
  * Public Functions
@@ -424,18 +425,7 @@ clear_game (void)
     int x, y;
     for (y = 0; y < WORLD_SIDE_LEN; y++) {
 	for (x = 0; x < WORLD_SIDE_LEN; x++) {
-	    int r = rand () %5;
-	    if (r == 0)
-	    	clear_mappoint (CST_DESERT, x, y);
-	    else if (r == 1)
-	    	clear_mappoint (CST_GREEN, x, y);
-	    else if (r == 2)
-	    	clear_mappoint (CST_TREE, x, y);
-	    else if (r == 3)
-	    	clear_mappoint (CST_TREE2, x, y);
-	    else if (r == 4)
-	    	clear_mappoint (CST_TREE3, x, y);
-
+	    clear_mappoint (CST_GREEN, x, y);
 	    MP_POL(x,y) = 0;
 	}
     }
@@ -461,6 +451,7 @@ new_city (int* originx, int* originy, int random_village)
     clear_game ();
     coal_reserve_setup ();
     setup_river ();
+    setup_land ();
     ore_reserve_setup ();
     init_pbars ();
 
@@ -516,7 +507,7 @@ void
 setup_river (void)
 {
     int x, y, i, j;
-    x = WORLD_SIDE_LEN / 2;
+    x = (1 * WORLD_SIDE_LEN  + rand () % WORLD_SIDE_LEN) / 3 ;
     y = WORLD_SIDE_LEN - 1;
     i = (rand () % 12) + 6;
     for (j = 0; j < i; j++) {
@@ -580,6 +571,80 @@ setup_river2 (int x, int y, int d)
 	    setup_river2 (x, y, -1);
 	if (x > 5 && x < WORLD_SIDE_LEN - 5)
 	    setup_river2 (x, y, 1);
+    }
+}
+
+void
+setup_land (void)
+{
+  int x, y, xw, yw;
+  for (y = 0; y < WORLD_SIDE_LEN; y++) {
+	for (x = 0; x < WORLD_SIDE_LEN; x++) {
+	    int d2w_min = 2 * WORLD_SIDE_LEN * WORLD_SIDE_LEN;
+	    int r;
+	    if (MP_GROUP(x,y) == GROUP_WATER)
+		continue;
+
+  	    for (yw = 0; yw < WORLD_SIDE_LEN; yw++) {
+		for (xw = 0; xw < WORLD_SIDE_LEN; xw++) {
+			int d2w;
+			if (MP_GROUP(xw,yw) != GROUP_WATER)
+				continue;
+			d2w = (xw-x)*(xw-x) + (yw-y)*(yw-y);
+			if (d2w < d2w_min)
+				d2w_min = d2w;
+		}
+	    }
+  	    /* Store square of distance to water for each tile */
+	    /* MP_DIST2WATER(x,y) = d2w_min; */
+
+	    r = rand () % (d2w_min/3 + 60);
+	    if (r >= 160) {
+	    	int r2 = rand() % 5;
+		if (r2 <= 1)
+	    		clear_mappoint (CST_DESERT, x, y);
+		else if (r2 <= 3)
+	    		clear_mappoint (CST_GREEN, x, y);
+		else 
+	    		clear_mappoint (CST_TREE, x, y);
+
+	    } else if (r >= 80) {
+	    	int r2 = rand() % 5;
+		if (r2 == 0)
+	    		clear_mappoint (CST_DESERT, x, y);
+		else if (r2 <= 2)
+	    		clear_mappoint (CST_GREEN, x, y);
+		else if (r2 == 3)
+	    		clear_mappoint (CST_TREE, x, y);
+		else
+	    		clear_mappoint (CST_TREE2, x, y);
+
+	    } else if (r >= 40) {
+	    	int r2 = rand() % 20;
+		if (r2 <= 1)
+	    		clear_mappoint (CST_DESERT, x, y);
+		else if (r2 <= 5)
+	    		clear_mappoint (CST_GREEN, x, y);
+		else if (r2 <= 10)
+	    		clear_mappoint (CST_TREE, x, y);
+		else if (r2 <= 15)
+			clear_mappoint (CST_TREE2, x, y);
+		else
+			clear_mappoint (CST_TREE3, x, y);
+	    } else {
+	    	int r2 = rand() % 40;
+		if (r2 <= 2)
+	    		clear_mappoint (CST_GREEN, x, y);
+		else if (r2 <= 10)
+	    		clear_mappoint (CST_TREE, x, y);
+		else if (r2 <= 25)
+			clear_mappoint (CST_TREE2, x, y);
+		else
+			clear_mappoint (CST_TREE3, x, y);
+	    }
+
+	    MP_POL(x,y) = 0;
+	}
     }
 }
 
