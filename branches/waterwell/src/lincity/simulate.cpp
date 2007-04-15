@@ -451,7 +451,6 @@ new_city (int* originx, int* originy, int random_village)
     clear_game ();
     coal_reserve_setup ();
     setup_river ();
-    setup_land ();
     ore_reserve_setup ();
     init_pbars ();
 
@@ -466,6 +465,8 @@ new_city (int* originx, int* originy, int random_village)
 	*originx = *originy = WORLD_SIDE_LEN/2 ;
 	update_pbar(PPOP,100,1);
     }
+    /* setup_land after putting village to prevent trouble when too much water */
+    setup_land ();
     connect_transport (1,1,WORLD_SIDE_LEN-2,WORLD_SIDE_LEN-2);
     refresh_pbars ();
 }
@@ -578,11 +579,15 @@ void
 setup_land (void)
 {
   int x, y, xw, yw;
+  int aridity = rand () %400 -150;
+
   for (y = 0; y < WORLD_SIDE_LEN; y++) {
 	for (x = 0; x < WORLD_SIDE_LEN; x++) {
 	    int d2w_min = 2 * WORLD_SIDE_LEN * WORLD_SIDE_LEN;
 	    int r;
-	    if (MP_GROUP(x,y) == GROUP_WATER)
+	    int arid=aridity;
+
+	    if ((MP_GROUP(x,y) == GROUP_WATER) || !GROUP_IS_BARE(MP_GROUP(x,y)))
 		continue;
 
   	    for (yw = 0; yw < WORLD_SIDE_LEN; yw++) {
@@ -595,45 +600,72 @@ setup_land (void)
 				d2w_min = d2w;
 		}
 	    }
-  	    /* Store square of distance to water for each tile */
-	    /* MP_DIST2WATER(x,y) = d2w_min; */
 
-	    r = rand () % (d2w_min/3 + 60);
-	    if (r >= 160) {
-	    	int r2 = rand() % 5;
-		if (r2 <= 1)
+	    /* near river lower aridity */
+	    if (aridity > 0) {
+		if (d2w_min < 5)
+			arid = aridity/3;
+		else if (d2w_min < 17)
+			arid = (aridity*2)/3;
+	    }
+	    r = rand () % (d2w_min/3+1) + arid;
+	    if (r >= 300) {
+	        /* very dry land */
+	    	int r2 = rand() % 10;
+	    	if (r2 <= 6)
+		    clear_mappoint (CST_DESERT, x, y);
+	    	else if (r2 <= 8)
+		    clear_mappoint (CST_GREEN, x, y);
+	    	else 
+		    clear_mappoint (CST_TREE, x, y);
+
+	    } else if (r >= 160) {
+	    	int r2 = rand() % 10;
+		if (r2 <= 2)
 	    		clear_mappoint (CST_DESERT, x, y);
-		else if (r2 <= 3)
+		else if (r2 <= 6)
 	    		clear_mappoint (CST_GREEN, x, y);
 		else 
 	    		clear_mappoint (CST_TREE, x, y);
 
 	    } else if (r >= 80) {
-	    	int r2 = rand() % 5;
-		if (r2 == 0)
+	    	int r2 = rand() % 10;
+		if (r2 <= 1)
 	    		clear_mappoint (CST_DESERT, x, y);
-		else if (r2 <= 2)
+		else if (r2 <= 4)
 	    		clear_mappoint (CST_GREEN, x, y);
-		else if (r2 == 3)
+		else if (r2 <= 6)
 	    		clear_mappoint (CST_TREE, x, y);
 		else
 	    		clear_mappoint (CST_TREE2, x, y);
 
 	    } else if (r >= 40) {
-	    	int r2 = rand() % 20;
-		if (r2 <= 1)
+	    	int r2 = rand() % 40;
+		if (r2 == 0)
 	    		clear_mappoint (CST_DESERT, x, y);
-		else if (r2 <= 5)
+		else if (r2 <= 12)
 	    		clear_mappoint (CST_GREEN, x, y);
-		else if (r2 <= 10)
+		else if (r2 <= 24)
 	    		clear_mappoint (CST_TREE, x, y);
-		else if (r2 <= 15)
+		else if (r2 <= 36)
 			clear_mappoint (CST_TREE2, x, y);
 		else
 			clear_mappoint (CST_TREE3, x, y);
-	    } else {
+	    }  else if (r >= 0) {
+	    	/* normal land */
 	    	int r2 = rand() % 40;
-		if (r2 <= 2)
+		if (r2 <= 10)
+	    		clear_mappoint (CST_GREEN, x, y);
+		else if (r2 <= 20)
+	    		clear_mappoint (CST_TREE, x, y);
+		else if (r2 <= 30)
+			clear_mappoint (CST_TREE2, x, y);
+		else
+			clear_mappoint (CST_TREE3, x, y);
+	    } else if (r >= -40) {
+	    	/* forest */
+	    	int r2 = rand() % 40;
+		if (r2 <= 5)
 	    		clear_mappoint (CST_GREEN, x, y);
 		else if (r2 <= 10)
 	    		clear_mappoint (CST_TREE, x, y);
@@ -641,9 +673,55 @@ setup_land (void)
 			clear_mappoint (CST_TREE2, x, y);
 		else
 			clear_mappoint (CST_TREE3, x, y);
+	    } else if (r >= -80) {
+	    	int r2 = rand() % 40;
+		if (r2 <= 0)
+			MP_TYPE(x, y) = CST_WATER;
+		else if (r2 <= 6)
+	    		clear_mappoint (CST_GREEN, x, y);
+		else if (r2 <= 15)
+	    		clear_mappoint (CST_TREE, x, y);
+		else if (r2 <= 28)
+			clear_mappoint (CST_TREE2, x, y);
+		else
+			clear_mappoint (CST_TREE3, x, y);
+	    } else if (r >= -120) {
+	    	int r2 = rand() % 40;
+		if (r2 <= 1)
+			MP_TYPE(x, y) = CST_WATER;
+		else if (r2 <= 6)
+	    		clear_mappoint (CST_GREEN, x, y);
+		else if (r2 <= 16)
+	    		clear_mappoint (CST_TREE, x, y);
+		else if (r2 <= 30)
+			clear_mappoint (CST_TREE2, x, y);
+		else
+			clear_mappoint (CST_TREE3, x, y);
+	    } else {
+	    	/* wetland */
+	    	int r2 = rand() % 40;
+		if (r2 <= 3 )
+			MP_TYPE(x, y) = CST_WATER;
+		else if (r2 <= 8)
+	    		clear_mappoint (CST_GREEN, x, y);
+		else if (r2 <= 20)
+	    		clear_mappoint (CST_TREE, x, y);
+		else if (r2 <= 35)
+			clear_mappoint (CST_TREE2, x, y);
+		else
+			clear_mappoint (CST_TREE3, x, y);
 	    }
 
 	    MP_POL(x,y) = 0;
+  	    /* Store square of distance to river for each tile */
+	    /* MP_DIST2RIVER(x,y) = d2w_min; */
+	}
+    }
+    /* setup group now to prevent terrible recursion */
+    for (y = 0; y < WORLD_SIDE_LEN; y++) {
+	for (x = 0; x < WORLD_SIDE_LEN; x++) {
+		if (MP_TYPE(x,y) == CST_WATER)
+		    clear_mappoint (CST_WATER, x, y);
 	}
     }
 }

@@ -224,8 +224,8 @@ XXX: Then it shouldn't be here
 #endif
 #define RESULTS_FILENAME "results"
 
-#define MAX_ICON_LEN 4096
-#define WORLD_SIDE_LEN 100
+#define MAX_ICON_LEN 4096	/* AL1 unused in NG */
+#define WORLD_SIDE_LEN 100	/* Minimap size is hardcoded 200 pixel => some job to do ...*/
 #define NUMOF_DAYS_IN_MONTH 100
 #define NUMOF_DAYS_IN_YEAR (NUMOF_DAYS_IN_MONTH*12)
 #define FAST_TIME_FOR_YEAR 1

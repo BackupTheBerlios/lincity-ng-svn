@@ -16,14 +16,22 @@ WIP:
  -random village has a water well.
 1174:
  -not-so-random terrain depending on distance to water (instead of uniform empty green land.)
+ -Aridity parameter => wetland --> desert
 
 TODO: 
 -----
+* Tuning of aridity parameter and others.
 * show well's range in starvation window (<= market range)
+* residence near river should not need water well.
 * load/save numof_waterwell and display it in stat window. (current load/save works)
 * sound.
-* basic ecology : desert, green, tree, tree2, tree3, % depending on water proximity.
+* basic ecology
 
+* tile property ++ water, underground_pollution, ore_reserve, coal_reserve, waste
+* annual event = waste => pollution diffusion and slow diminution (1000 years)
+* computer water in land at start.
+  - show it in mining view.
+  - Farm and commune efficiency x= min (1,#tile_with_underground_water/8)
 
 AIM:
 ----
@@ -101,3 +109,4 @@ or put them in the wiki.
 
 * non-navigable waters (not seas) could very slowly become green (less than 1/1000 chance per year)
 
+* Minimap size is hardcoded 200 pixel = 2x WORLD_SIDE_LEN. Probably need to use pixel for sharp graphics.
