@@ -351,7 +351,12 @@ load_city (char *cname)
     if (ldsv_version < MIN_WATERWELL_VERSION) {
 	/* ok_dial_box ("no-waterwell.mes", GOOD, 0L);*/
 	use_waterwell=false;
-    } /* else use_waterwell=true is already done in global initialisation */
+    } else {
+    	use_waterwell=true; 
+	/* needed until it is written in the saved file
+	 * in case of load after having played an old game
+	 */
+    }
 
     init_pbars();
     num_pbars = NUM_PBARS;

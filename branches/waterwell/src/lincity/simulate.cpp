@@ -446,6 +446,7 @@ clear_game (void)
     init_inventory();
     update_avail_modules(0);
     use_waterwell = true;
+    ldsv_version = MIN_WATERWELL_VERSION;
 }
 
 void
