@@ -173,7 +173,7 @@ bool ButtonPanel::enoughTech( int moduleType ){
 }
 
 /*
- * enable/disabel buttons accordig to tech.
+ * enable/disable buttons according to tech.
  *  lincity/ldsvguts.cpp
  *  oldgui/module_buttons.cpp
  */
@@ -246,6 +246,15 @@ void ButtonPanel::examineButton( std::string name, int showInfo ){
             b->setTooltip(tooltip);
         }
     }
+    if ( name=="BPMWaterwellButton" & !use_waterwell ) {
+            b->enable( false );
+            char tooltip[2048];
+            snprintf(tooltip, sizeof(tooltip), _("%s is disabled (loaded old game)."),
+	    		createTooltip(selected_module_type, false ).c_str());
+	    b->setTooltip(tooltip);
+    }
+
+
     selected_module_type = tmp;
 }
 
