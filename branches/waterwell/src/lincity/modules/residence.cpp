@@ -7,6 +7,7 @@
 
 #include "modules.h"
 #include "residence.h"
+#include "waterwell.h"
 #include <stdlib.h>
 
 void
@@ -69,18 +70,26 @@ do_residence (int x, int y)
 	}
     }
     /* normal births - must have food, water and jobs... and people */
-    if ((MP_INFO(x,y).flags & (FLAG_FED + FLAG_WATERWELL_COVER + FLAG_EMPLOYED))
-	== (FLAG_FED + FLAG_WATERWELL_COVER+ FLAG_EMPLOYED)
+    if ((MP_INFO(x,y).flags & (FLAG_FED + (use_waterwell && FLAG_WATERWELL_COVER) + FLAG_EMPLOYED))
+	== (FLAG_FED + (use_waterwell && FLAG_WATERWELL_COVER) + FLAG_EMPLOYED)
 	&& (rand () % (RESIDENCE_BASE_BR + MP_INFO(x,y).int_4) == 1) 
 	&& p > 0)
     {
+#ifdef DEBUG_WATERWELL
+    	fprintf(stderr," birth ok, we are fed. use_waterwell= %i\n",use_waterwell);
+#endif
 	p++;
 	total_births++;
 	good += 50;
     }
     /* are people starving or lacking water ? */
-    if ( ((MP_INFO(x,y).flags & FLAG_FED) == 0 | (MP_INFO(x,y).flags & FLAG_WATERWELL_COVER) == 0) && p > 0)
+    if ( ((MP_INFO(x,y).flags & FLAG_FED) == 0)
+		| (use_waterwell & (MP_INFO(x,y).flags & FLAG_WATERWELL_COVER) == 0) 
+		&& p > 0)
     {
+#ifdef DEBUG_WATERWELL
+    	fprintf(stderr," hey, we are dying: lack of food or water!, use_waterwell=%i\n",use_waterwell);
+#endif
 	if (rand () % DAYS_PER_STARVE == 1)
 	{
 	    p--;

@@ -39,6 +39,8 @@
 #include "gui_interface/pbar_interface.h"
 //#include "module_buttons.h"
 
+extern void connect_rivers (void);
+
 /* ---------------------------------------------------------------------- *
  * Private Fn Prototypes
  * ---------------------------------------------------------------------- */
@@ -443,6 +445,7 @@ clear_game (void)
     tech_level = 0;
     init_inventory();
     update_avail_modules(0);
+    use_waterwell = true;
 }
 
 void
@@ -587,6 +590,7 @@ setup_land (void)
 	    int r;
 	    int arid=aridity;
 
+	    /* test against GROUP_WATER which is added after the loop for new water tiles */
 	    if ((MP_GROUP(x,y) == GROUP_WATER) || !GROUP_IS_BARE(MP_GROUP(x,y)))
 		continue;
 
@@ -713,8 +717,6 @@ setup_land (void)
 	    }
 
 	    MP_POL(x,y) = 0;
-  	    /* Store square of distance to river for each tile */
-	    /* MP_DIST2RIVER(x,y) = d2w_min; */
 	}
     }
     /* setup group now to prevent terrible recursion */
@@ -724,6 +726,9 @@ setup_land (void)
 		    clear_mappoint (CST_WATER, x, y);
 	}
     }
+    connect_rivers ();
+  	    /* TODO Store square of distance to river for each tile */
+	    /* MP_DIST2RIVER(x,y) = d2w_min; */
 }
 
 int

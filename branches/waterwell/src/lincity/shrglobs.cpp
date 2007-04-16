@@ -7,6 +7,10 @@
 //#include "common.h"
 #include "fileutil.h"
 
+/* load/save version for compatibility with(out) waterwell */
+int ldsv_version = 1170;
+int use_waterwell = true;
+
 Map map;
 
 int mappoint_array_x[WORLD_SIDE_LEN];

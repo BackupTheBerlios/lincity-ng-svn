@@ -283,7 +283,14 @@ bulldoze_item (int x, int y)
     }
     else {
 	adjust_money(-main_groups[g].bul_cost);
-	do_bulldoze_area (CST_DESERT, x, y);
+	/* A little ugly hack to keep compatibility when saving pre_waterwell loaded game
+	 * This should be temporary as compatibility will probably be lost for sure later
+	 */
+	if (use_waterwell)
+		do_bulldoze_area (CST_DESERT, x, y);
+	else
+		do_bulldoze_area (CST_GREEN, x, y);
+
 	if (g == GROUP_OREMINE)
 	{
 	    int i, j;

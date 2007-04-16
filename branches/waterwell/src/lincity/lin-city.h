@@ -52,6 +52,9 @@ XXX: Then it shouldn't be here
    the symbol VERSION in config.h */
 #define VERSION_INT 113
 
+/* Disable waterwell if version < MIN_WATERWELL_VERSION */
+#define MIN_WATERWELL_VERSION 1180
+
 /* Don't load if < MIN_LOAD_VERSION */
 #define MIN_LOAD_VERSION 97
 

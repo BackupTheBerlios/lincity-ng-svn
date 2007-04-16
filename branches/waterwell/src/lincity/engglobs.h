@@ -10,6 +10,7 @@
 //#include "common.h"
 //#include "geometry.h"
 
+extern int use_waterwell, ldsv_version;
 
 /* GCS -- One of these days I will get this right. */
 struct map_struct

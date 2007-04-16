@@ -13,6 +13,12 @@ void
 do_waterwell_cover (int x, int y)
 {
   int xx, x1, x2, y1, y2;
+#ifdef DEBUG_WATERWELL
+  if (use_waterwell)
+  	fprintf(stderr," doing waterwell cover\n");
+  else 
+  	return;
+#endif
 
   x1 = x - WATERWELL_RANGE;
   if (x1 < 0)
