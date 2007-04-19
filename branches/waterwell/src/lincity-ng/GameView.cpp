@@ -848,7 +848,11 @@ void GameView::event(const Event& event)
             if( roadDragging && ( cursorSize != 1 ) ){
                 roadDragging = false;
             }
-            if( roadDragging && ( selected_module_type == CST_GREEN ) 
+            if( roadDragging 
+	    	    && ( selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+		        |selected_module_type == CST_TREE
+		        |selected_module_type == CST_TREE2
+		        |selected_module_type == CST_TREE3 ) 
                     && getConfig()->instantBulldoze ){ 
                 editMap( tile, SDL_BUTTON_LEFT);
                 startRoad = tile;
@@ -1369,7 +1373,7 @@ void GameView::markTile( Painter& painter, MapPoint tile )
         } else {
             for( y = (int) tile.y; y < tile.y + cursorSize; y++ ) {
                 for( x = (int) tile.x; x < tile.x + cursorSize; x++ ) {
-                    if( MP_TYPE( x, y ) != CST_DESERT ) {
+                    if( !GROUP_IS_BARE(MP_GROUP( x, y ))) {
                         painter.setFillColor( alphared );
                         y += cursorSize;
                         break;
@@ -1546,18 +1550,26 @@ void GameView::draw(Painter& painter)
             currentTile = startRoad;
             while( currentTile.x != tileUnderMouse.x ) {
                 markTile( painter, currentTile );
-                if( selected_module_type == CST_GREEN && realTile( currentTile ) != lastRazed ){ 
-                    cost += bulldozeCost( currentTile );
-                    lastRazed = realTile( currentTile );
+                if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+				|selected_module_type == CST_TREE 
+				|selected_module_type == CST_TREE2
+				|selected_module_type == CST_TREE3)
+		     && realTile( currentTile ) != lastRazed ){ 
+                    	cost += bulldozeCost( currentTile );
+                    	lastRazed = realTile( currentTile );
                 }
                 tiles++;
                 currentTile.x += stepx;
             }
             while( currentTile.y != tileUnderMouse.y ) {
                 markTile( painter, currentTile );
-                if( selected_module_type == CST_GREEN && realTile( currentTile ) != lastRazed ){ 
-                    cost += bulldozeCost( currentTile );
-                    lastRazed = realTile( currentTile );
+                if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+				|selected_module_type == CST_TREE 
+				|selected_module_type == CST_TREE2
+				|selected_module_type == CST_TREE3)
+		     && realTile( currentTile ) != lastRazed ){ 
+                    	cost += bulldozeCost( currentTile );
+                    	lastRazed = realTile( currentTile );
                 }
                 tiles++;
                 currentTile.y += stepy;
@@ -1565,10 +1577,17 @@ void GameView::draw(Painter& painter)
         } 
         markTile( painter, tileUnderMouse );
         tiles++;
-        if( selected_module_type == CST_GREEN && realTile( currentTile ) != lastRazed ) { 
-            cost += bulldozeCost( tileUnderMouse );
+        if( (selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+				|selected_module_type == CST_TREE 
+				|selected_module_type == CST_TREE2
+				|selected_module_type == CST_TREE3)
+	     && realTile( currentTile ) != lastRazed ) { 
+            	  cost += bulldozeCost( tileUnderMouse );
         } 
-        if( selected_module_type == CST_GREEN ){
+        if( selected_module_type == CST_GREEN |selected_module_type == CST_DESERT
+				|selected_module_type == CST_TREE 
+				|selected_module_type == CST_TREE2
+				|selected_module_type == CST_TREE3 ){
             std::stringstream prize;
             if( roadDragging ){
                 prize << _("Estimated Bulldoze Cost: ");
@@ -1652,11 +1671,7 @@ int GameView::bulldozeCost( MapPoint tile ){
                           MP_INFO(tile.x,tile.y).int_2 );
     else
         group = MP_GROUP( tile.x,tile.y );
-    if (group == 0) {  /* Can't bulldoze grass. */
-        prize = 0; 
-    } else {
-        prize = main_groups[group].bul_cost;
-    }
+    prize = main_groups[group].bul_cost;
     return prize;
 }
 
