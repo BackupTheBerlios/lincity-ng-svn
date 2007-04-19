@@ -722,10 +722,13 @@ setup_land (void)
     }
     /* setup group now to prevent terrible recursion */
     for (y = 0; y < WORLD_SIDE_LEN; y++) {
-	for (x = 0; x < WORLD_SIDE_LEN; x++) {
-		if (MP_TYPE(x,y) == CST_WATER)
-		    clear_mappoint (CST_WATER, x, y);
-	}
+	    for (x = 0; x < WORLD_SIDE_LEN; x++) {
+		    if (MP_TYPE(x,y) == CST_WATER){
+                int navigable = MP_INFO(x,y).flags & FLAG_IS_RIVER;
+		        clear_mappoint (CST_WATER, x, y);
+                MP_INFO(x,y).flags |= navigable;
+            }
+	    }
     }
     connect_rivers ();
   	    /* TODO Store square of distance to river for each tile */
