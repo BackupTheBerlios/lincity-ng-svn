@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <sstream>
 #include <stdexcept>
 #include <iostream>
+#include <memory>
 #include <physfs.h>
 #include "tinygettext/gettext.hpp"
 #include "gui/Component.hpp"
@@ -100,6 +101,20 @@ HelpWindow::getHelpFile(const std::string& topic)
     if(PHYSFS_exists(filename.c_str()))
        return filename;
 
+    // try short language, eg. "de" instead of "de_CH"
+    std::string language = dictionaryManager->get_language();
+    std::string::size_type pos = language.find("_");
+    if(pos != std::string::npos) {
+        language = std::string(language, 0, pos);
+        filename = "help/";
+        filename += language + "/";
+        filename += topic;
+        filename += ".xml";
+        if(PHYSFS_exists(filename.c_str()))
+            return filename;
+    }
+    
+    // try english
     filename = "help/en/";
     filename += topic;
     filename += ".xml";
