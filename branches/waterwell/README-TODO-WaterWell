@@ -9,14 +9,13 @@ HELP NEEDED:
 
 WIP:
 ----
-1170: basic water management implemented:
+basic water management implemented:
  -icon, tile (hmmm, must be redrawn by someone competent)
  -help (en), info with query tool and in residences.
  -residence need water like food. Lack of water has the same consequences as lack of food.
  -random village has a water well.
-1174:
- -not-so-random terrain depending on distance to water (instead of uniform empty green land.)
- -Aridity parameter => wetland --> desert
+ -farm output depend of underground water: initial desert tile have no underground water
+ -2 scenarios: extreme_arid and extreme_wetland    (random village is in between)
 
 TODO: 
 -----

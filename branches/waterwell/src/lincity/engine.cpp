@@ -26,6 +26,7 @@
 #include "gui_interface/shared_globals.h"
 
 extern int selected_type_cost;
+static void bulldoze_mappoint (short fill, int x, int y);
 
 void
 fire_area (int x, int y)
@@ -264,6 +265,7 @@ bulldoze_item (int x, int y)
 
     size = MP_SIZE(x,y);
     g = MP_GROUP(x,y);
+    people_pool += MP_INFO(x,y).population;
 
     if (g == GROUP_DESERT) {
 	/* Nothing to do. */
@@ -272,6 +274,7 @@ bulldoze_item (int x, int y)
     else if (g == GROUP_SHANTY) {
 	fire_area (x, y);
 	adjust_money(-GROUP_SHANTY_BUL_COST);
+        numof_shanties--;
     }
     else if (g == GROUP_FIRE) {
 	if (MP_INFO(x,y).int_2 >= FIRE_LENGTH)
@@ -291,8 +294,16 @@ bulldoze_item (int x, int y)
 	else
 		do_bulldoze_area (CST_GREEN, x, y);
 
-	if (g == GROUP_OREMINE)
-	{
+        if (g == GROUP_COMMUNE)
+            numof_communes--;
+
+        if (g == GROUP_MARKET)
+            remove_a_market (x, y);
+
+        if (g == GROUP_SUBSTATION || g == GROUP_WINDMILL)
+            remove_a_substation (x, y);
+
+	if (g == GROUP_OREMINE) {
 	    int i, j;
 	    for (j = 0; j < 4; j++)
 		for (i = 0; i < 4; i++)
@@ -306,6 +317,43 @@ bulldoze_item (int x, int y)
     return size;  /* No longer used... */
 }
 
+void
+do_bulldoze_area (short fill, int xx, int yy)
+{
+  int size, x, y;
+  if (MP_TYPE(xx,yy) == CST_USED)
+    {
+      x = MP_INFO(xx,yy).int_1;
+      y = MP_INFO(xx,yy).int_2;
+    }
+  else
+    {
+      x = xx;
+      y = yy;
+    }
+  size = MP_SIZE(x,y);
+  for (int i = 0; i < size; i++)
+      for (int j = 0; j < size; j++)  
+          bulldoze_mappoint (fill, x+i, y+j);
+}
+
+static void 
+bulldoze_mappoint (short fill, int x, int y)
+{
+    /* bulldoze preserve underground resources */
+    MP_TYPE(x,y) = fill;
+    MP_GROUP(x,y) = get_group_of_type(fill);
+    if (MP_GROUP(x,y) < 0) MP_GROUP(x,y) = GROUP_BARE;
+    MP_INFO(x,y).population = 0;
+    MP_INFO(x,y).flags &= FLAG_HAS_UNDERGROUND_WATER;
+    MP_INFO(x,y).int_1 = 0;
+    MP_INFO(x,y).int_2 = 0;
+    MP_INFO(x,y).int_3 = 0;
+    MP_INFO(x,y).int_4 = 0;
+    MP_INFO(x,y).int_5 = 0;
+    MP_INFO(x,y).int_6 = 0;
+    MP_INFO(x,y).int_7 = 0;
+}
 
 /** Mappoint array shuffles mappoint in order to stop linear simulation effects */
 
@@ -874,60 +922,6 @@ spiral_find_2x2 (int startx, int starty)
   return (-1);
 }
 
-
-
-void
-do_bulldoze_area (short fill, int xx, int yy)
-{
-  int size, x, y;
-  if (MP_TYPE(xx,yy) == CST_USED)
-    {
-      x = MP_INFO(xx,yy).int_1;
-      y = MP_INFO(xx,yy).int_2;
-    }
-  else
-    {
-      x = xx;
-      y = yy;
-    }
-  size = MP_SIZE(x,y);
-  if (MP_GROUP(x,y) == GROUP_SUBSTATION
-      || MP_GROUP(x,y) == GROUP_WINDMILL)
-    remove_a_substation (x, y);
-  else if (MP_GROUP(x,y) == GROUP_MARKET)
-    remove_a_market (x, y);
-  else if (MP_GROUP(x,y) == GROUP_SHANTY)
-    numof_shanties--;
-  else if (MP_GROUP(x,y) == GROUP_COMMUNE)
-    numof_communes--;
-
-  people_pool += MP_INFO(x,y).population;
-  clear_mappoint (fill, x, y);
-  if (size > 1)			/* do size 2 */
-    {
-      clear_mappoint (fill, x + 1, y);
-      clear_mappoint (fill, x, y + 1);
-      clear_mappoint (fill, x + 1, y + 1);
-    }
-  if (size > 2)			/* do size 3 */
-    {
-      clear_mappoint (fill, x + 2, y);
-      clear_mappoint (fill, x + 2, y + 1);
-      clear_mappoint (fill, x + 2, y + 2);
-      clear_mappoint (fill, x, y + 2);
-      clear_mappoint (fill, x + 1, y + 2);
-    }
-  if (size > 3)			/* do size 4 */
-    {
-      clear_mappoint (fill, x + 3, y);
-      clear_mappoint (fill, x + 3, y + 1);
-      clear_mappoint (fill, x + 3, y + 2);
-      clear_mappoint (fill, x + 3, y + 3);
-      clear_mappoint (fill, x, y + 3);
-      clear_mappoint (fill, x + 1, y + 3);
-      clear_mappoint (fill, x + 2, y + 3);
-    }
-}
 
 
 void

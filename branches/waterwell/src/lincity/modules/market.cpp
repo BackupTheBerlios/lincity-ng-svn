@@ -377,6 +377,7 @@ add_a_market (int x, int y)	/* add to marketx markety to list */
 void
 remove_a_market (int x, int y)
 {
+  /* Should try to use jobs to put everything on transport or other markets ?*/
   int q;
   for (q = 0; q < numof_markets; q++)
     if (marketx[q] == x && markety[q] == y)

@@ -174,9 +174,10 @@ XXX: Then it shouldn't be here
 #define FLAG_IS_RIVER           (0x800000)
 #define FLAG_HAD_POWER          (0x1000000)
 #define FLAG_MULTI_TRANSPORT    (0x2000000)   /* Is it a multitransport? */ /* AL1: unused in NG 1.1 */
-#define FLAG_MULTI_TRANS_PREV   (0x4000000)	/* AL1: unused in NG 1.1 */
+#define FLAG_MULTI_TRANS_PREV   (0x4000000)	  /* AL1: unused in NG 1.1 */
 #define FLAG_POWER_LINE         (0x8000000)
 #define FLAG_WATERWELL_COVER    (0x10000000)
+#define FLAG_HAS_UNDERGROUND_WATER (0x20000000)
 
 /* XXX: It would appear that the following T_ are used exactly two times each,
    in market.c.  */

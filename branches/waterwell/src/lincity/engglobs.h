@@ -32,8 +32,7 @@ extern Map map;
 #define MP_SIZE(x,y)   main_groups[MP_GROUP(x,y)].size
 #define MP_COLOR(x,y)  main_groups[MP_GROUP(x,y)].colour
 #define MP_GROUP_IS_RESIDENCE(x,y)  (GROUP_IS_RESIDENCE(MP_GROUP(x,y)))
-
-
+#define HAS_UGWATER(x,y) (MP_INFO(x,y).flags & FLAG_HAS_UNDERGROUND_WATER) 
 
 extern int mappoint_array_x[WORLD_SIDE_LEN], mappoint_array_y[WORLD_SIDE_LEN];
 extern int numof_shanties, numof_communes;

@@ -286,8 +286,11 @@ mps_residence (int x, int y)
 
     mps_store_sd(i++,_("People"), MP_INFO(x,y).population);
 
-    p = ((MP_INFO(x,y).flags & FLAG_WATERWELL_COVER) != 0) ? _("YES") : _("NO");
-    mps_store_ss(i++, _("Water"), p);
+    if (use_waterwell) {
+        p = ((MP_INFO(x,y).flags & FLAG_WATERWELL_COVER) != 0) 
+                 ? _("YES") : _("NO");
+        mps_store_ss(i++, _("Water"), p);
+    }
 
     p = ((MP_INFO(x,y).flags & FLAG_FED) != 0) ? _("YES") : _("NO");
     mps_store_ss(i++, _("Fed"), p);
