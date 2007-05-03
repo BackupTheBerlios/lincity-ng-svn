@@ -281,6 +281,13 @@ place_item (int x, int y, short type)
     case GROUP_WATERWELL:
 	numof_waterwell++;
         break;
+    case GROUP_PARKLAND:
+        if (use_waterwell)
+            if (!HAS_UGWATER(x,y)) {
+                ok_dial_box("warning.mes", BAD,
+                        _("You can't build a park here: it is a desert, parks need water"));
+                return -8;
+            }
 
     } /* end case */
     last_warning_message_group = 0;

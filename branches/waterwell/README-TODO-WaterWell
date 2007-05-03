@@ -5,33 +5,45 @@ This file is a temporary note book.
 
 HELP NEEDED:
 ------------
-- Better graphic for icon and tile. (i did my best but its not enough ;-)
+ -Better graphic for icon and tile. (i did my best but its not enough ;-)
+ -sound for waterwell tile.
+  
+BUGS:
+-----
+ -population decrease in initial random village ! FIXME
+ -icon, tile (hmmm, must be redrawn by someone competent)
+ -info with query tool seems to not work on desert and trees, or work randomly
 
 WIP:
 ----
 basic water management implemented:
  -icon, tile (hmmm, must be redrawn by someone competent)
- -help (en), info with query tool and in residences.
  -residence need water like food. Lack of water has the same consequences as lack of food.
  -random village has a water well.
- -farm output depend of underground water: initial desert tile have no underground water
- -2 scenarios: extreme_arid and extreme_wetland    (random village is in between)
-
+ -initial desert tiles have no underground water (added flag has_underground_water)
+ -farm output depend of underground water
+ -2 scenarios: extreme_arid and extreme_wetland (random village is in between)
+ -Tuning of aridity parameter and others.
+  
 TODO: 
 -----
+* help (en), info with query tool, (waterwell, residences, farms, communes, parks, pollution)
 * Tuning of aridity parameter and others.
-* show well's range in starvation window (<= market range)
-* residence near river should not need water well.
+* show well's range in starvation window (<= market range) // ? display numof_waterwell in stat window ?
 * load/save numof_waterwell and display it in stat window. (current load/save works)
 * sound.
-* basic ecology
-
+* basic ecology: change desert with UGW (= bulldozed tile) to green after some monthes.
+   (needed for showing UGW for placing farms etc ...)
+ 
 * tile property ++ water, underground_pollution, ore_reserve, coal_reserve, waste
 * annual event = waste => pollution diffusion and slow diminution (1000 years)
-* computer water in land at start.
-  - show it in mining view.
-  - Farm and commune efficiency x= min (1,#tile_with_underground_water/8)
-
+	In NG_1.1 already, tips slowly degrade to green.
+  
++ * computer water in land at start. (FLAG_HAS_UNDERGROUND_WATER)
+    - show it in mining view.
++   - commune efficiency x= min (1,#tile_with_underground_water/8)
++   - parks need underground water (maybe also 'or 2 neighbouring tile with UGW')
+  
 AIM:
 ----
 * simple ecology = periodic event :
@@ -40,20 +52,24 @@ AIM:
    - water ++%increase
    = just look nicer (change nothing in the game) but could show impact of human activities on forests :)
 
-* farms, industries also need water (connection needed?, or pipes?)
-
 * Water quality (from drinkable to mortal).
+  - tile property ++ UG_water, UG_pollution, UG_waste , UG_altitude.
   - residences, farms and industries can pollute water.
   - park along a river or around a well will also reduce the pollution.
-  - pollution transported by river will follow the flow, so travel toward the bottom
-      of the map (y++) (roughtly opposite of wind direction :-)
-
-* think of how to import existing games without killing all population by thirstyness.
-  (maybe just add a new version to check at load time if water management should be enabled)
+  - altitude to know the local slope and the drainage basin.
+        unit 1cm        +1/tile is enough slope for calm river, large river => +0/tile,
+                        coast line +100, land + rand() % mountainity per tile.
+        maybe just UGW_altitude. Need to be tested and displayed in altitude minimap.
+        pb: ugw motion with desert tile
+  - annual event = waste => pollution diffusion and slow diminution (1000 years)
+  - pollution transported by water will follow the slope, so go in river and travel toward the bottom
+      of the map (roughtly opposite of wind direction :-)
 
 Won't do soon:
 --------------
 * Areas without water could need high-tech deep well and/or pipes to feed the water station.
+
+* residence near river should not need water well.
 
 * transport capacity for water = water_on_road, water_on rail.... ?
   This mean quantity management of water. can be very tricky in addition to quality.
@@ -62,6 +78,8 @@ Won't do soon:
 
 * fire/health cover in dry area should cost more (need more equipment ...)
 
+* industries also need water (connection needed?, or pipes?)
+
 REMARKS/NOTES:
 --------------
 Don't consider this is important, it's just some ideas i have while wandering in the
@@ -69,16 +87,18 @@ code. I write them here instead of somewhere else, but maybe i will just forget 
 or put them in the wiki.
 
 * random village is placed near water in original lincity :) 
-  (see src/lincity/simulate.cpp random_start near line 610)
+  (see src/lincity/simulate.cpp random_start)
 
 * Code contains obsolete stuff from old lincity (eg .csi references ...). Maybe a clean up should
  be considered, but that can be a big job with compatibility issues.
  (so in another branch, and later as far as i m concerned :-)
 
-* better separation of engine and graphics could be nice for future:
-   - a building gives: tech at build time, average state (production %) during last period
+* separation of engine and graphics is rather good
+   - additional data structure could be useful
+        map += group_xyz_no_credit + underground missing stuff + empty slots for future improvements.
+   - a building gives: tech at build time, average state (needs %, production %) during last period
    - the drawing modules uses the info to choose correct tile, and manage looping for
-     cleaner animation (currently fast speed skip frames => weird animation).
+                cleaner animation (currently fast speed skip frames => weird animation).
 
 * With market range, everything can already jump accross rivers.
 * rivers are ready for transport: in lin-city.h  
@@ -96,6 +116,20 @@ or put them in the wiki.
              (group == GROUP_RAIL) || \
              (group == GROUP_POWER_LINE))
   Beach scenario could cause trouble (stock many thing in the sea !).
+  FLAG_IS_RIVER (=navigable) should allow to control this: 
+  	coast line = navigable = RIVER
+	off shore = not navigable = WATER
+  In current version (1195), in Beach all the sea is navigable.
+
+* Speed of transport: (must think of this and look more carefully)
+  afaik speed of transport +-= 1 tile/iteration for all transports
+  it could be set to different value: speed = N <=> N iteration
+  track_speed = 1
+  road_speed = 2
+  train_speed = 3
+  river_speed = 0.3 but huge capacity for coal,ore and steel.
+  	low speed should prevent absorbing everything, but once the
+	river is loaded it should be a nice transport.
 
 * Parks are not entertainment parks. They are biological depollution tool
  => they are build in very polluted areas (sometimes mortal)
@@ -106,6 +140,9 @@ or put them in the wiki.
 * Graphic before rail techlevel should not have cars, but horses and bullocks instead.
 * Low tech houses looks too modern.
 
-* non-navigable waters (not seas) could very slowly become green (less than 1/1000 chance per year)
+* non-navigable waters (not seas) could very slowly become green
+        less than 1/1000 chance per year, inversely proportionnal to surface.
 
 * Minimap size is hardcoded 200 pixel = 2x WORLD_SIDE_LEN. Probably need to use pixel for sharp graphics.
+
+
