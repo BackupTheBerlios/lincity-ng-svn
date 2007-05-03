@@ -51,8 +51,8 @@ static void end_of_year_update (void);
 static void random_start (int* originx, int* originy);
 static void simulate_mappoints (void);
 static void quick_start_add (int x, int y, short type, int size);
-static void setup_land (void);
 static void nullify_mappoint (int x, int y);
+static void setup_land (void);
 
 #define IS_RIVER(x,y) (MP_INFO(x,y).flags & FLAG_IS_RIVER)
 
@@ -453,10 +453,10 @@ clear_game (void)
     rockets_launched_success = 0;
     init_inventory();
     update_avail_modules(0);
-    use_waterwell = true;
-    ldsv_version = MIN_WATERWELL_VERSION;
     /* Al1. NG 1.1 is this enough ? Are all global variables reseted ? */
     /* TODO reset screen, sustain info */
+    use_waterwell = true;
+    ldsv_version = MIN_WATERWELL_VERSION;
 }
 
 void

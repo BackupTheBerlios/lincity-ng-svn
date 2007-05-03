@@ -89,11 +89,6 @@ XXX: Then it shouldn't be here
 #define FATAL   -1
 #define WARNING -2
 
-#ifndef M_PI
-#define M_PI        3.14159265358979323846
-#endif
-
-
 /* comment out the the next three lines for _slightly_ faster X drawing. */
 #if defined LC_X11 || defined WIN32
 #define ALLOW_PIX_DOUBLING
@@ -1354,18 +1349,6 @@ extern void do_coalmine (int, int);
 extern void do_oremine (int, int);
 extern void do_commune (int, int);
 extern void do_port (int, int);
-extern int buy_food (int, int);
-extern int buy_jobs (int, int);
-extern int buy_coal (int, int);
-extern int buy_ore (int, int);
-extern int buy_goods (int, int);
-extern int buy_steel (int, int);
-extern int sell_food (int, int);
-extern int sell_jobs (int, int);
-extern int sell_coal (int, int);
-extern int sell_ore (int, int);
-extern int sell_goods (int, int);
-extern int sell_steel (int, int);
 
 extern void do_pollution (void);
 extern void do_parkland (int, int);
@@ -1374,7 +1357,6 @@ extern void do_recycle (int, int);
 extern void do_health_centre (int, int);
 extern void do_rocket_pad (int, int);
 extern void launch_rocket (int x, int y);
-extern void remove_people (int);
 extern void do_windmill (int, int);
 extern void do_monument (int, int);
 extern void do_school (int, int);
@@ -1393,7 +1375,7 @@ extern void do_fire (int, int);
 extern int spiral_find_group (int, int, int);
 extern int spiral_find_2x2 (int, int);
 extern void add_a_shanty (void);
-extern void remove_a_shanty (void);
+extern void remove_a_shanty (int, int);
 extern void update_shanty (void);
 extern void do_shanty (int, int);
 extern void do_tip (int, int);
