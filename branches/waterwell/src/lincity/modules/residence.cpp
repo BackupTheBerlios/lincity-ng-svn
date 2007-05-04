@@ -26,6 +26,7 @@ do_residence (int x, int y)
     int hc = 0;                      /* have health cover ? */
     int brm = 0, drm = 0;            /* birth/death rate modifier */
     int cc = 0;
+    int birth_flag=0;
 
     p = MP_INFO(x,y).population;
     if ((MP_INFO(x,y).flags & FLAG_HEALTH_COVER) != 0)
@@ -70,10 +71,14 @@ do_residence (int x, int y)
 	}
     }
     /* normal births - must have food, water and jobs... and people */
-    if ((MP_INFO(x,y).flags & (FLAG_FED + (use_waterwell && FLAG_WATERWELL_COVER) + FLAG_EMPLOYED))
-	== (FLAG_FED + (use_waterwell && FLAG_WATERWELL_COVER) + FLAG_EMPLOYED)
+    if (use_waterwell) 
+        birth_flag = FLAG_FED + FLAG_WATERWELL_COVER + FLAG_EMPLOYED;
+    else
+        birth_flag = FLAG_FED + FLAG_EMPLOYED;
+
+    if (((MP_INFO(x,y).flags & birth_flag) == birth_flag)
 	&& (rand () % (RESIDENCE_BASE_BR + MP_INFO(x,y).int_4) == 1) 
-	&& p > 0)
+	&& (p > 0))
     {
 #ifdef DEBUG_WATERWELL
     	fprintf(stderr," birth ok, we are fed. use_waterwell= %i\n",use_waterwell);
@@ -172,7 +177,8 @@ do_residence (int x, int y)
 	}
     }
 
-    population += p;
+    /* XXX AL1: this is daily accumulator used stats.cpp, and maybe pop graph */
+    population += p; 
 
     /* now get power */
     if (get_power (x, y, POWER_RES_OVERHEAD
@@ -203,31 +209,25 @@ do_residence (int x, int y)
 	swing = JOB_SWING + (hc * HC_JOB_SWING) + cc;
     else
 	swing = -(JOB_SWING + (hc * HC_JOB_SWING) + cc);
-    if (put_jobs (x, y, ((p * (WORKING_POP_PERCENT + swing)) / 100)) != 0)
-    {
+
+    if (put_jobs (x, y, ((p * (WORKING_POP_PERCENT + swing)) / 100)) != 0) {
 	MP_INFO(x,y).flags |= FLAG_EMPLOYED;
 	MP_INFO(x,y).int_1++;
 	if (MP_INFO(x,y).int_1 > 10)
 	    MP_INFO(x,y).int_1 = 10;
 	good += 20;
-	if (get_goods (x, y, p / 4) != 0)
-	{
+	if (get_goods (x, y, p / 4) != 0) {
 	    good += 10;
-	    if (get_power (x, y, p / 2, 0) != 0)	/* goods use power */
-
-	    {
+	    if (get_power (x, y, p / 2, 0) != 0) {
 		good += 5;
 		brm += 10;
 		/*     buy more goods if got power for them */
 		if (get_goods (x, y, p / 4) != 0)
 		    good += 5;
-	    }
-	    else
+	    } else
 		bad += 5;
 	}
-    }
-    else if (MP_INFO(x,y).int_1 < 10)
-    {
+    } else if (MP_INFO(x,y).int_1 < 10) {
 	MP_INFO(x,y).flags &= (0xffffffff - FLAG_EMPLOYED);
 	MP_INFO(x,y).int_1 -= 11;
 	if (MP_INFO(x,y).int_1 < -300)
@@ -242,11 +242,8 @@ do_residence (int x, int y)
 	    unemployed_history += 1.0;
 	}
 	unemployment_cost += p;	/* hmmm */
-
 	bad += 70;
-    }
-    else
-    {
+    } else {
 	MP_INFO(x,y).int_1 -= 20;
 	bad += 50;
     }
@@ -256,16 +253,12 @@ do_residence (int x, int y)
     bad += MP_POL(x,y) / 20;
     good += people_pool / 27;
     r = rand () % ((good + bad) * RESIDENCE_PPM);
-    if (r < bad)
-    {
-	if (p > MIN_RES_POPULATION)
-	{
+    if (r < bad) {
+	if (p > MIN_RES_POPULATION) {
 	    p--;
 	    people_pool++;
 	}
-    }
-    else if (people_pool > 0 && r > ((good + bad) * (RESIDENCE_PPM - 1) + bad))
-    {
+    } else if (people_pool > 0 && r > ((good + bad) * (RESIDENCE_PPM - 1) + bad)) {
 	p++;
 	people_pool--;
     }

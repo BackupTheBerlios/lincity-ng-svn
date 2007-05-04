@@ -10,43 +10,33 @@ HELP NEEDED:
   
 BUGS:
 -----
- -population decrease in initial random village ! FIXME
  -icon, tile (hmmm, must be redrawn by someone competent)
  -info with query tool seems to not work on desert and trees, or work randomly
+ -bug of trunk = (re)initialisation of engine and UI is not enough.
 
 WIP:
 ----
 basic water management implemented:
- -icon, tile (hmmm, must be redrawn by someone competent)
  -residence need water like food. Lack of water has the same consequences as lack of food.
  -random village has a water well.
+ -well's range is shown in starvation window and around cursor
  -initial desert tiles have no underground water (added flag has_underground_water)
- -farm output depend of underground water
+ -farm and charcoal (in communes) production depends on underground water
+ -parks need ugw (no park on true desert tile)
  -2 scenarios: extreme_arid and extreme_wetland (random village is in between)
- -Tuning of aridity parameter and others.
+ -basic ecology: change desert with UGW (= bulldozed tile) to green after some monthes.
+   (needed for showing UGW for placing farms communes and parks)
+ -Tuning of aridity parameter and others (communes, farms, parks) seems rather correct.
   
 TODO: 
 -----
-* help (en), info with query tool, (waterwell, residences, farms, communes, parks, pollution)
-* Tuning of aridity parameter and others.
-* show well's range in starvation window (<= market range) // ? display numof_waterwell in stat window ?
-* load/save numof_waterwell and display it in stat window. (current load/save works)
-* sound.
-* basic ecology: change desert with UGW (= bulldozed tile) to green after some monthes.
-   (needed for showing UGW for placing farms etc ...)
+* additional tiles for desert (like water)
+* help (en), info with query tool, (waterwell, residences, farms, communes, parks)
  
-* tile property ++ water, underground_pollution, ore_reserve, coal_reserve, waste
-* annual event = waste => pollution diffusion and slow diminution (1000 years)
-	In NG_1.1 already, tips slowly degrade to green.
-  
-+ * computer water in land at start. (FLAG_HAS_UNDERGROUND_WATER)
-    - show it in mining view.
-+   - commune efficiency x= min (1,#tile_with_underground_water/8)
-+   - parks need underground water (maybe also 'or 2 neighbouring tile with UGW')
-  
 AIM:
 ----
 * simple ecology = periodic event :
+   - probably need additional property (global aridity, tile_aridity_table_pointer)
    - neighbours  => % decrease/increase from desert to tree3. (tree3 need 4 neighbouring trees)
    - pollution ++%decrease
    - water ++%increase
@@ -54,19 +44,22 @@ AIM:
 
 * Water quality (from drinkable to mortal).
   - tile property ++ UG_water, UG_pollution, UG_waste , UG_altitude.
-  - residences, farms and industries can pollute water.
-  - park along a river or around a well will also reduce the pollution.
   - altitude to know the local slope and the drainage basin.
         unit 1cm        +1/tile is enough slope for calm river, large river => +0/tile,
                         coast line +100, land + rand() % mountainity per tile.
         maybe just UGW_altitude. Need to be tested and displayed in altitude minimap.
-        pb: ugw motion with desert tile
-  - annual event = waste => pollution diffusion and slow diminution (1000 years)
+        pb: ugw motion with desert tile:
+                -probably need some iterations during creation to draw a path.
+                -allow diagonal motion
+  - residences, farms and industries can pollute water.
+  - park along a river or around a well will also reduce the pollution.
   - pollution transported by water will follow the slope, so go in river and travel toward the bottom
       of the map (roughtly opposite of wind direction :-)
+  - annual event = waste => pollution diffusion and slow diminution (1000 years)
+	In NG_1.1 already, tips slowly degrade to green.
 
-Won't do soon:
---------------
+Won't do soon, maybe never:
+---------------------------
 * Areas without water could need high-tech deep well and/or pipes to feed the water station.
 
 * residence near river should not need water well.
@@ -85,6 +78,8 @@ REMARKS/NOTES:
 Don't consider this is important, it's just some ideas i have while wandering in the
 code. I write them here instead of somewhere else, but maybe i will just forget them later,
 or put them in the wiki.
+
+* initialise with srand (time) and add command line option --seed (easier debugging)
 
 * random village is placed near water in original lincity :) 
   (see src/lincity/simulate.cpp random_start)

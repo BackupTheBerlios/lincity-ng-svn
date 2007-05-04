@@ -40,6 +40,7 @@
 //#include "module_buttons.h"
 
 extern void connect_rivers (void);
+extern void do_daily_ecology (void);
 
 /* ---------------------------------------------------------------------- *
  * Private Fn Prototypes
@@ -248,10 +249,13 @@ static void
 do_periodic_events (void)
 {
   add_daily_to_monthly();
-
+  do_daily_ecology ();
 
   if ((total_time % NUMOF_DAYS_IN_YEAR) == 0) {
     start_of_year_update ();
+  }
+  if ((total_time % DAYS_PER_POLLUTION) == 3) {
+    do_pollution ();
   }
   if ((total_time % DAYS_BETWEEN_FIRES) == 9
       && tech_level > (GROUP_FIRESTATION_TECH * MAX_TECH_LEVEL / 1000)) {
@@ -270,9 +274,6 @@ do_periodic_events (void)
   }
   if (total_time % NUMOF_DAYS_IN_YEAR == (NUMOF_DAYS_IN_YEAR - 1)) {
     end_of_year_update ();
-  }
-  if ((total_time % DAYS_PER_POLLUTION) == 3) {
-    do_pollution ();
   }
 }
 

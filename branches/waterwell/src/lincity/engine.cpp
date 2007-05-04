@@ -627,6 +627,17 @@ do_random_fire (int x, int y, int pwarning)	/* well random if x=y=-1 */
   fire_area (x, y);
 }
 
+void do_daily_ecology ()
+{
+    for (int x = 0; x < WORLD_SIDE_LEN; x++)
+        for (int y = 0; y < WORLD_SIDE_LEN; y++) {
+            /* approximately 3 monthes needed to turn bulldoze area into green */
+            if (MP_GROUP(x,y) == GROUP_DESERT && HAS_UGWATER(x,y) 
+                    && rand() %300 == 1)
+                do_bulldoze_area(CST_GREEN, x, y);
+        }
+}
+
 /*
    // spiral round from startx,starty until we hit something of group group.
    // return the x y coords encoded as x+y*WORLD_SIDE_LEN
