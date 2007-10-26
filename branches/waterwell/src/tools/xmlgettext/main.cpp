@@ -24,6 +24,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdlib>
+#include <string.h>
 
 typedef std::map<std::string, std::vector<std::string> > Texts;
 Texts texts;
@@ -74,12 +76,12 @@ void parseFile(const std::string& filename)
             if(translatable) {
                 const char* p = (const char*) reader.getValue();
                 // skip trailing spaces...
-                while(*p != 0 && isspace(*p))
+                while(*p != 0 && isspace(static_cast<unsigned char>(*p)))
                     ++p;
 
                 bool lastspace = false;
                 for( ; *p != 0; ++p) {
-                    if(isspace(*p)) {
+                    if(isspace(static_cast<unsigned char>(*p))) {
                         if(!lastspace) {
                             lastspace = true;
                             text += ' ';
@@ -141,14 +143,16 @@ int main(int argc, char** argv)
 "\"Content-Transfer-Encoding: 8bit\\n\"\n";
 
     for(Texts::iterator i = texts.begin(); i != texts.end(); ++i) {
-        out << "\n";
-        out << "#: ";
-        for(std::vector<std::string>::iterator p = i->second.begin();
+    	if(!i->first.empty()){ //no need to translate empty Strings
+            out << "\n";
+            out << "#: ";
+            for(std::vector<std::string>::iterator p = i->second.begin();
                 p != i->second.end(); ++p) {
-            out << *p << " ";
+                out << *p << " ";
+            }
+            out << "\n";
+            out << "msgid \"" << i->first << "\"\n";
+            out << "msgstr \"\"\n";
         }
-        out << "\n";
-        out << "msgid \"" << i->first << "\"\n";
-        out << "msgstr \"\"\n";
     }
 }

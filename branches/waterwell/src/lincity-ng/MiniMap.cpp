@@ -204,7 +204,7 @@ void MiniMap::attachButtons()
 
     for(int i = 0; speedButtons[i] != 0; ++i) {
         CheckButton* b = getCheckButton(*root, speedButtons[i]);
-        // we start in normal speed...
+	setLincitySpeed(SLOW_TIME_FOR_YEAR);
         if(i == 1)
             b->check();
         b->clicked.connect(makeCallback(*this, &MiniMap::speedButtonClicked));
@@ -545,6 +545,10 @@ void MiniMap::draw(Painter &painter)
                         mc=getColor(x,y);
                         painter.setFillColor(mc);
                         painter.fillRectangle(Rect2D(x*tilesize,y*tilesize,(x+main_groups[grp].size)*tilesize+1,(y+main_groups[grp].size)*tilesize));
+                    } else if( mMode == COAL ) { //show coal under buildings, too
+                        mc=getColor(x,y);
+                        painter.setFillColor(mc);
+                        painter.fillRectangle(Rect2D(x*tilesize,y*tilesize,(x+1)*tilesize+1,(y+1)*tilesize));
                     }
                 }
             }
