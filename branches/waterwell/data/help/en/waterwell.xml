@@ -2,10 +2,9 @@
 <Document style="helpdocument">
 	<p style="htitle">Water well</p>
 	<p style="hp"><b> Work in progress. May crash/hang ... (no warranty: reread the GPL license ;-)</b></p>
-	<p style="hp">Provide water to builings within the range. Polluted water will have consequences. Parks reduce pollution of waterwell. Range of water well is shown in starvation overlay.</p>
+        <p style="hp">Provide water to houses within the range. Lack of water will have the same consequences as lack of food. Informations is shown in starvation overlay/minimap.</p>
 
 	<p style="hp">See also:</p>
-	<li><a href="park">Parks</a></li>
-	<li><a href="pollution">Pollution</a></li>
+	<li><a href="food">Food</a></li>
 	<li><a href="msb-starve">Starvation overlay</a></li>
 </Document>

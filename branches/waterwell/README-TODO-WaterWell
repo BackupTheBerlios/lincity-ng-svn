@@ -14,8 +14,8 @@ BUGS:
  -info with query tool seems to not work on desert and trees, or work randomly
  -bug of trunk = (re)initialisation of engine and UI is not enough.
 
-WIP:
-----
+DONE:
+-----
 basic water management implemented:
  -residence need water like food. Lack of water has the same consequences as lack of food.
  -random village has a water well.
@@ -30,8 +30,11 @@ basic water management implemented:
   
 TODO: 
 -----
+* Translations: English is ok, other languages not: 
+        added data/help/en/waterwell.xml
+        modified residential.xml, farms.xml, parks.xml, communes.xml, index.xml, button-index.xml.
 * additional tiles for desert (like water)
-* help (en), info with query tool, (waterwell, residences, farms, communes, parks)
+* info with query tool, (waterwell, residences, farms, communes, parks)
  
 AIM:
 ----
@@ -75,9 +78,9 @@ Won't do soon, maybe never:
 
 REMARKS/NOTES:
 --------------
-Don't consider this is important, it's just some ideas i have while wandering in the
-code. I write them here instead of somewhere else, but maybe i will just forget them later,
-or put them in the wiki.
+Don't consider this is important, it's just some ideas caught while wandering in the
+code. They are written here instead of somewhere else, but maybe they will just be forgotten
+or go in the wiki.
 
 * initialise with srand (time) and add command line option --seed (easier debugging)
 
